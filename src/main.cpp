@@ -39,6 +39,7 @@
 #include "common/app_name.h"
 
 #include "modes/boot/boot.h"
+#include "modes/battle/battle.h"
 #include "main_options.h"
 
 #include <SDL2/SDL_image.h>
@@ -602,7 +603,14 @@ int main(int argc, char* argv[])
     SDL_SetWindowTitle(sdl_window, app_fullname.c_str());
     SDL_ShowWindow(sdl_window);
 
-    ModeManager->Push(new BootMode(), false, true);
+    //ModeManager->Push(new BootMode(), false, true);
+
+    vt_battle::BattleMode* battleMode = new vt_battle::BattleMode();
+    battleMode->AddEnemy(1);
+    battleMode->AddEnemy(1);
+    battleMode->AddEnemy(1);
+
+    ModeManager->Push(battleMode, false, false);
 
     // Used for a variable game speed,
     // sleeping when on sufficiently fast hardware, and max FPS.
