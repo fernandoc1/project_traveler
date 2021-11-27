@@ -610,6 +610,8 @@ int main(int argc, char* argv[])
     battleMode->AddEnemy(1);
     battleMode->AddEnemy(1);
 
+    GlobalManager->GetCharacterHandler().AddCharacter(1);
+
     ModeManager->Push(battleMode, false, false);
 
     // Used for a variable game speed,
