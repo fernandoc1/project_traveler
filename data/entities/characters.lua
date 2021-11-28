@@ -9,6 +9,115 @@
 -- All character definitions are stored in this table
 characters = {}
 
+characters[BORGHEN] = {
+    name = vt_system.Translate("Borghen"),
+    portrait = "data/entities/portraits/bronann.png",
+    full_portrait = "data/entities/portraits/bronann_full.png",
+    battle_portraits = "data/entities/portraits/battle/bronann_damage.png",
+    stamina_icon = "data/battles/stamina_icons/characters/bronann.png",
+    map_sprite_name = "Bronann",
+    special_skill_category_name = vt_system.Translate("Holy"),
+    special_skill_category_icon = "data/gui/battle/holy.png",
+    starting_skill_node_id = 27,
+
+    battle_animations = {
+        idle = "data/new_assets/borghen_idle.lua",
+        run = "data/entities/battle/characters/bronann/bronann_run.lua",
+        run_after_victory = "data/entities/battle/characters/bronann/bronann_run_after_victory.lua",
+        attack = "data/entities/battle/characters/bronann/bronann_attack.lua",
+        attack_forward_thrust = "data/entities/battle/characters/bronann/bronann_attack_forward_thrust.lua",
+        dodge = "data/entities/battle/characters/bronann/bronann_dodge.lua",
+        victory = "data/entities/battle/characters/bronann/bronann_victory.lua",
+        hurt = "data/entities/battle/characters/bronann/bronann_hurt.lua",
+        poor = "data/entities/battle/characters/bronann/bronann_kneeling.lua",
+        dying = "data/entities/battle/characters/bronann/bronann_kneeling.lua",
+        dead = "data/entities/battle/characters/bronann/bronann_dead.lua",
+        revive = "data/entities/battle/characters/bronann/bronann_kneeling.lua",
+        item = "data/entities/battle/characters/bronann/bronann_idle.lua",
+        magic_prepare = "data/entities/battle/characters/bronann/bronann_magic_prepare.lua",
+        magic_cast = "data/entities/battle/characters/bronann/bronann_magic_cast.lua",
+        jump_forward = "data/entities/battle/characters/bronann/bronann_jump_forward.lua",
+        jump_backward = "data/entities/battle/characters/bronann/bronann_jump_backward.lua",
+        escape_smoke = "data/entities/battle/characters/bronann/bronann_magic_cast.lua",
+    },
+
+    initial_stats = {
+        experience_level = 1,
+        experience_points = 0,
+        max_hit_points = 62,
+        max_skill_points = 8,
+        phys_atk = 12,
+        mag_atk = 4,
+        phys_def = 15,
+        mag_def = 6,
+        stamina = 30,
+        evade = 5.0,
+        weapon = 0,
+        head_armor = 0,
+        torso_armor = 30001,
+        arm_armor = 0,
+        leg_armor = 50001
+    },
+
+    attack_points = {
+        [vt_global.GameGlobal.GLOBAL_POSITION_HEAD] = {
+            name = vt_system.Translate("Head"),
+            x_position = 31,
+            y_position = 54,
+            phys_def_modifier = -0.20,
+            mag_def_modifier = 0.25,
+            evade_modifier = 0.50,
+            status_effects = { [vt_global.GameGlobal.GLOBAL_STATUS_MAG_ATK] = 10.0 }
+        },
+        [vt_global.GameGlobal.GLOBAL_POSITION_TORSO] = {
+            name = vt_system.Translate("Torso"),
+            x_position = 37,
+            y_position = 34,
+            phys_def_modifier = 0.40,
+            mag_def_modifier = 0.10,
+            evade_modifier = -0.20
+        },
+        [vt_global.GameGlobal.GLOBAL_POSITION_ARMS] = {
+            name = vt_system.Translate("Arms"),
+            x_position = 31,
+            y_position = 54,
+            phys_def_modifier = 0.10,
+            mag_def_modifier = 0.00,
+            evade_modifier = 0.10,
+            status_effects = { [vt_global.GameGlobal.GLOBAL_STATUS_PHYS_ATK] = 10.0 }
+        },
+        [vt_global.GameGlobal.GLOBAL_POSITION_LEGS] = {
+            name = vt_system.Translate("Legs"),
+            x_position = 37,
+            y_position = 34,
+            phys_def_modifier = 0.20,
+            mag_def_modifier = 0.20,
+            evade_modifier = 0.05,
+            status_effects = { [vt_global.GameGlobal.GLOBAL_STATUS_STAMINA] = 10.0 }
+        }
+    },
+
+    experience_for_next_level = {
+        100,     112,     126,     142,     161,     183,     209,     238,     273,     315, --  1 - 10
+        363,     421,     490,     572,     670,     788,     931,     1105,    1316,    1575, -- 11 - 20
+        1894,    2287,    2775,    3383,    3980,    4697,    5563,    6610,    7881,    9430, -- 21 - 30
+        11324,   13648,   16510,   20050,   24443,   29917,   36765,   45367,   56217,   69963, -- 31 - 40
+        87451,   109799,  138488,  175484,  223420,  285828,  367474,  474823,  616683,  659193, -- 41 - 50
+        704867,  753959,  806742,  863512,  924591,  990329,  1061105, 1137331, 1219457, 1307968, -- 51 - 60
+        1403396, 1506316, 1617356, 1737200, 1866590, 2006338, 2157328, 2320522, 2496972, 2687823, -- 61 - 70
+        2894328, 3117852, 3359888, 3622066, 3761437, 3906539, 4057622, 4214949, 4378792, 4549437, -- 71 - 80
+        4727184, 4912347, 5105253, 5306245, 5515683, 5733942, 5961416, 6198517, 6445676, 6703346, -- 81 - 90
+        6972000, 7252133, 7544265, 7848940, 8166727, 8498223, 8844055, 9204879, 9581381, 9974283, -- 91 - 100
+        10384340, -- 101
+    },
+
+    -- The default skill available when no weapon.
+    bare_hands_skills = { 30001 },
+
+    -- [character level] = skill_id learned.
+    skills = { [1] = 1, [2] = 2, [8] = 3, [16] = 10003, [32] = 4, [64] = 10004, [100] = 6 }
+} -- characters[BORGHEN]
+
 characters[BRONANN] = {
     name = vt_system.Translate("Bronann"),
     portrait = "data/entities/portraits/bronann.png",

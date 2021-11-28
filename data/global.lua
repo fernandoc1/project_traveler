@@ -14,10 +14,11 @@ setfenv = setfenv or function(f, t)
 end
 
 -- Character IDs. Each ID can have only a single bit active as IDs are used in bitmask operations.
-BRONANN  = 1;
-KALYA    = 2;
-SYLVE    = 4;
-THANIS   = 8;
+BORGHEN  = 1;
+BRONANN  = 2;
+KALYA    = 4;
+SYLVE    = 8;
+THANIS   = 16;
 
 -- level cap
 GlobalManager:SetMaxExperienceLevel(20);
