@@ -36,8 +36,8 @@ characters[BORGHEN] = {
         item =                  "data/new_assets/borghen_idle.lua",
         magic_prepare =         "data/entities/battle/characters/bronann/bronann_magic_prepare.lua",
         magic_cast =            "data/entities/battle/characters/bronann/bronann_magic_cast.lua",
-        jump_forward =          "data/entities/battle/characters/bronann/bronann_jump_forward.lua",
-        jump_backward =         "data/entities/battle/characters/bronann/bronann_jump_backward.lua",
+        jump_forward =          "data/new_assets/borghen_jump_forward.lua",
+        jump_backward =         "data/new_assets/borghen_jump_forward.lua",
         escape_smoke =          "data/entities/battle/characters/bronann/bronann_magic_cast.lua",
     },
 
