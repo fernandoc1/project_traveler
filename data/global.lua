@@ -15,10 +15,11 @@ end
 
 -- Character IDs. Each ID can have only a single bit active as IDs are used in bitmask operations.
 BORGHEN  = 1;
-BRONANN  = 2;
-KALYA    = 4;
-SYLVE    = 8;
-THANIS   = 16;
+AERITH   = 2;
+BRONANN  = 4;
+KALYA    = 8;
+SYLVE    = 16;
+THANIS   = 32;
 
 -- level cap
 GlobalManager:SetMaxExperienceLevel(20);
