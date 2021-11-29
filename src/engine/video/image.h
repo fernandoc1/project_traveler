@@ -610,7 +610,7 @@ public:
     *** element image.
     *** \note All image elements within the multi image should be of the same size
      */
-    bool LoadFromAnimationScript(const std::string &filename);
+    bool LoadFromAnimationScript(const std::string &filename, const std::string &animation_image_filename = "");
 
     /** \brief Draws the current frame image which is modulated by a color
     *** \param draw_color The color to modulate the image by

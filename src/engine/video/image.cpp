@@ -1079,7 +1079,7 @@ void AnimatedImage::Clear()
     _animation_time = 0;
 }
 
-bool AnimatedImage::LoadFromAnimationScript(const std::string &filename)
+bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const std::string &animation_image_filename)
 {
     vt_script::ReadScriptDescriptor image_script;
     if(!image_script.OpenFile(filename))
@@ -1093,7 +1093,12 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename)
 
     image_script.OpenTable("animation");
 
-    std::string image_filename = image_script.ReadString("image_filename");
+    std::string image_filename;
+    if(animation_image_filename.size() > 0) {
+        image_filename = animation_image_filename;
+    } else {
+        image_filename = image_script.ReadString("image_filename");
+    }
     if (image_script.DoesBoolExist("blended_animation"))
         _blended_animation = image_script.ReadBool("blended_animation");
 

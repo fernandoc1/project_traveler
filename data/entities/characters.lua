@@ -20,6 +20,8 @@ characters[BORGHEN] = {
     special_skill_category_icon = "data/gui/battle/holy.png",
     starting_skill_node_id = 27,
 
+    image_file = "data/new_assets/borghen-p0.png",
+
     battle_animations = {
         idle =                  "data/new_assets/borghen_idle.lua",
         run =                   "data/new_assets/borghen_run.lua",
