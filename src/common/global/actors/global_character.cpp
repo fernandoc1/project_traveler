@@ -148,13 +148,13 @@ GlobalCharacter::GlobalCharacter(uint32_t id, bool initial) :
 
     // Read each battle_animations table keys and store the corresponding animation in memory.
     std::vector<std::string> keys_vect;
-    std::string image_animation = char_script.ReadString("image_file");
+    std::string image_file = char_script.ReadString("image_file");
     char_script.ReadTableKeys("battle_animations", keys_vect);
     char_script.ReadTableKeys("battle_animations", keys_vect);
     if (char_script.OpenTable("battle_animations")) {
         for(uint32_t i = 0; i < keys_vect.size(); ++i) {
             AnimatedImage animation;
-            animation.LoadFromAnimationScript(char_script.ReadString(keys_vect[i]));
+            animation.LoadFromAnimationScript(char_script.ReadString(keys_vect[i]), image_file);
             _battle_animation[keys_vect[i]] = animation;
         }
         char_script.CloseTable(); // battle_animations
