@@ -23,8 +23,8 @@ default_battle_animations = {
     dead =                  "data/battles/actions/dead.lua",
     revive =                "data/battles/actions/kneeling.lua",
     item =                  "data/battles/actions/idle.lua",
-    magic_prepare =         "data/battles/actions/idle.lua",
-    magic_cast =            "data/battles/actions/idle.lua", 
+    magic_prepare =         "data/battles/actions/magic_prepare.lua",
+    magic_cast =            "data/battles/actions/magic_cast.lua", 
     jump_forward =          "data/battles/actions/jump_forward.lua",
     jump_backward =         "data/battles/actions/jump_forward.lua",
     escape_smoke =          "data/battles/actions/idle.lua",
@@ -211,8 +211,8 @@ characters[AERITH] = {
     bare_hands_skills = { 30001 },
 
     -- [character level] = skill_id learned.
-    skills = { [1] = 1, [2] = 2, [8] = 3, [16] = 10003, [32] = 4, [64] = 10004, [100] = 6 }
-} -- characters[BORGHEN]
+    skills = { [1] = 1, [2] = 2, [1] = 10002, [8] = 3, [16] = 10003, [32] = 4, [64] = 10004, [100] = 6 }
+} -- characters[AERITH]
 
 characters[BRONANN] = {
     name = vt_system.Translate("Bronann"),
