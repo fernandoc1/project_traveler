@@ -9,6 +9,27 @@
 -- All character definitions are stored in this table
 characters = {}
 
+default_battle_animations = {
+    idle =                  "data/battles/actions/idle.lua",
+    run =                   "data/battles/actions/run.lua",
+    run_after_victory =     "data/battles/actions/run_after_victory.lua", 
+    attack =                "data/battles/actions/attack.lua", 
+    attack_forward_thrust = "data/battles/actions/attack.lua",
+    dodge =                 "data/battles/actions/dodge.lua",
+    victory =               "data/battles/actions/victory.lua", 
+    hurt =                  "data/battles/actions/hurt.lua", 
+    poor =                  "data/battles/actions/kneeling.lua",
+    dying =                 "data/battles/actions/kneeling.lua",
+    dead =                  "data/battles/actions/dead.lua",
+    revive =                "data/battles/actions/kneeling.lua",
+    item =                  "data/battles/actions/idle.lua",
+    magic_prepare =         "data/battles/actions/idle.lua",
+    magic_cast =            "data/battles/actions/idle.lua", 
+    jump_forward =          "data/battles/actions/jump_forward.lua",
+    jump_backward =         "data/battles/actions/jump_forward.lua",
+    escape_smoke =          "data/battles/actions/idle.lua",
+}
+
 characters[BORGHEN] = {
     name = vt_system.Translate("Borghen"),
     portrait = "data/entities/portraits/bronann.png",
@@ -22,26 +43,7 @@ characters[BORGHEN] = {
 
     image_file = "data/entities/character_sprites/borghen-p0.png",
 
-    battle_animations = {
-        idle =                  "data/battles/actions/idle.lua",
-        run =                   "data/battles/actions/run.lua",
-        run_after_victory =     "data/battles/actions/run_after_victory.lua", 
-        attack =                "data/battles/actions/attack.lua", 
-        attack_forward_thrust = "data/battles/actions/attack.lua",
-        dodge =                 "data/battles/actions/dodge.lua",
-        victory =               "data/battles/actions/victory.lua", 
-        hurt =                  "data/battles/actions/hurt.lua", 
-        poor =                  "data/battles/actions/kneeling.lua",
-        dying =                 "data/battles/actions/kneeling.lua",
-        dead =                  "data/battles/actions/dead.lua",
-        revive =                "data/battles/actions/kneeling.lua",
-        item =                  "data/battles/actions/idle.lua",
-        magic_prepare =         "data/battles/actions/idle.lua",
-        magic_cast =            "data/battles/actions/idle.lua", 
-        jump_forward =          "data/battles/actions/jump_forward.lua",
-        jump_backward =         "data/battles/actions/jump_forward.lua",
-        escape_smoke =          "data/battles/actions/idle.lua",
-    },
+    battle_animations = default_battle_animations;
 
     initial_stats = {
         experience_level = 1,
