@@ -612,6 +612,7 @@ int main(int argc, char* argv[])
 
     GlobalManager->GetCharacterHandler().AddCharacter(1);
     GlobalManager->GetCharacterHandler().AddCharacter(2);
+    GlobalManager->GetCharacterHandler().AddCharacter(3);
 
     ModeManager->Push(battleMode, false, false);
 
