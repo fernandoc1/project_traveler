@@ -92,6 +92,8 @@ skills[1] = {
     BattleExecute = function(user, target)
         local target_actor = target:GetActor();
 
+        print("HERE!!!!");
+
         if (vt_battle.RndEvade(target_actor) == false) then
             -- Normal +0 attack
             target_actor:RegisterDamage(vt_battle.RndPhysicalDamage(user, target_actor), target);
@@ -103,7 +105,9 @@ skills[1] = {
     end,
 
     animation_scripts = {
-        [BRONANN] = "data/battles/characters_animations/bronann_attack.lua",
+        --[BORGHEN] = "data/battles/actions/weapon_attack.lua",
+        [BORGHEN] ="data/battles/characters_animations/bronann_attack.lua", 
+        [BRONANN] ="data/battles/characters_animations/bronann_attack.lua", 
         [THANIS] = "data/battles/characters_animations/thanis_attack.lua"
     }
 }
@@ -132,6 +136,7 @@ skills[2] = {
     end,
 
     animation_scripts = {
+        [BORGHEN] = "data/battles/actions/weapon_attack.lua",
         [BRONANN] = "data/battles/characters_animations/bronann_attack_forward_thrust.lua",
         [KALYA] = "data/battles/characters_animations/kalya_double_attack.lua",
         [THANIS] = "data/battles/characters_animations/thanis_attack.lua"
@@ -166,6 +171,7 @@ skills[3] = {
     end,
 
     animation_scripts = {
+        [BORGHEN] = "data/battles/actions/weapon_attack.lua",
         [BRONANN] = "data/battles/characters_animations/bronann_attack.lua",
         [KALYA] = "data/battles/characters_animations/kalya_attack.lua",
         [THANIS] = "data/battles/characters_animations/thanis_attack.lua"
@@ -202,6 +208,7 @@ skills[4] = {
     end,
 
     animation_scripts = {
+        [BORGHEN] = "data/battles/actions/weapon_attack.lua",
         [BRONANN] = "data/battles/characters_animations/bronann_attack.lua",
         [THANIS] = "data/battles/characters_animations/thanis_blade_rush_attack.lua"
     }
@@ -262,6 +269,7 @@ skills[6] = {
     end,
 
     animation_scripts = {
+        [BORGHEN] = "data/battles/actions/weapon_attack.lua",
         [BRONANN] = "data/battles/characters_animations/bronann_attack.lua",
         [THANIS] = "data/battles/characters_animations/thanis_blade_rush_attack.lua"
     }
