@@ -37,6 +37,29 @@ end
 -- IDs 10,001 - 10,500 are reserved for swords
 -- -----------------------------------------------------------------------------
 
+default_battle_animations = {
+    idle =                  "data/battles/actions/idle.lua",
+    run =                   "data/battles/actions/run.lua",
+    run_after_victory =     "data/battles/actions/run_after_victory.lua", 
+    attack =                "data/battles/actions/sword_attack.lua", 
+    --attack =                "data/battles/actions/attack.lua", 
+    --attack =                "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_attack.lua", 
+    attack_forward_thrust = "data/battles/actions/attack.lua",
+    dodge =                 "data/battles/actions/dodge.lua",
+    victory =               "data/battles/actions/victory.lua", 
+    hurt =                  "data/battles/actions/hurt.lua", 
+    poor =                  "data/battles/actions/kneeling.lua",
+    dying =                 "data/battles/actions/kneeling.lua",
+    dead =                  "data/battles/actions/dead.lua",
+    revive =                "data/battles/actions/kneeling.lua",
+    item =                  "data/battles/actions/idle.lua",
+    magic_prepare =         "data/battles/actions/magic_prepare.lua",
+    magic_cast =            "data/battles/actions/magic_cast.lua", 
+    jump_forward =          "data/battles/actions/jump_forward.lua",
+    jump_backward =         "data/battles/actions/jump_forward.lua",
+    escape_smoke =          "data/battles/actions/idle.lua",
+}
+
 -- Wood/earth family
 -- -----------------
 weapons[10001] = {
@@ -50,7 +73,10 @@ weapons[10001] = {
     slots = 0,
     key_item = true,
 
+    image_file = "data/entities/character_sprites/borghen-p0.png",
+
     battle_animations = {
+        [BORGHEN] = default_battle_animations;
         [BRONANN] = {
             idle = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_idle.lua",
             run = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_run.lua",

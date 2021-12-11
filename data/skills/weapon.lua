@@ -92,8 +92,6 @@ skills[1] = {
     BattleExecute = function(user, target)
         local target_actor = target:GetActor();
 
-        print("HERE!!!!");
-
         if (vt_battle.RndEvade(target_actor) == false) then
             -- Normal +0 attack
             target_actor:RegisterDamage(vt_battle.RndPhysicalDamage(user, target_actor), target);
@@ -105,7 +103,7 @@ skills[1] = {
     end,
 
     animation_scripts = {
-        --[BORGHEN] = "data/battles/actions/weapon_attack.lua",
+        --[BORGHEN] ="data/battles/actions/weapon_attack.lua", 
         [BORGHEN] ="data/battles/characters_animations/bronann_attack.lua", 
         [BRONANN] ="data/battles/characters_animations/bronann_attack.lua", 
         [THANIS] = "data/battles/characters_animations/thanis_attack.lua"
