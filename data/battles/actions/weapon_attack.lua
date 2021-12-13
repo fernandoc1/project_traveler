@@ -6,7 +6,7 @@
 -- Set the namespace
 local ns = {};
 setmetatable(ns, {__index = _G});
-bronann_attack = ns;
+weapon_attack = ns;
 setfenv(1, ns);
 
 -- local references
@@ -39,6 +39,7 @@ local slash_effect_started = false
 -- target, the BattleEnemy target
 -- The skill id used on target
 function Initialize(_character, _target, _skill)
+    print("--->DEBUG: INITIALIZE FUNCTION!!!!");
     -- Keep the reference in memory
     character = _character;
     target = _target;
