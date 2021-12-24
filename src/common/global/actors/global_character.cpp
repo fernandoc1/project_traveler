@@ -150,7 +150,6 @@ GlobalCharacter::GlobalCharacter(uint32_t id, bool initial) :
     std::vector<std::string> keys_vect;
     std::string image_file = char_script.ReadString("image_file");
     char_script.ReadTableKeys("battle_animations", keys_vect);
-    char_script.ReadTableKeys("battle_animations", keys_vect);
     if (char_script.OpenTable("battle_animations")) {
         for(uint32_t i = 0; i < keys_vect.size(); ++i) {
             AnimatedImage animation;
@@ -343,6 +342,8 @@ bool GlobalCharacter::LoadCharacter(ReadScriptDescriptor& file)
 
     // Gets whether the character is currently enabled
     Enable(file.ReadBool("enabled"));
+
+    SetImageFile(file.ReadString("image_file"));
 
     // Read in all of the character's stats data
     SetExperienceLevel(file.ReadUInt("experience_level"));

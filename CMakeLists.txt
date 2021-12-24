@@ -6,6 +6,8 @@ PROJECT(VALYRIATEAR)
 OPTION(DEBUG_FEATURES "Compile the game with the debug features" OFF)
 OPTION(DISABLE_TRANSLATIONS "Disable gettext / l10n support" OFF)
 
+SET(CMAKE_BUILD_TYPE Debug)
+
 IF (NOT VERSION)
     SET(VERSION 1.1.0)
 ENDIF()

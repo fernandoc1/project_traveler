@@ -77,6 +77,10 @@ public:
         return _map_sprite_name;
     }
 
+    const std::string &GetImageFile() {
+        return _image_file;
+    }
+
     vt_video::StillImage &GetPortrait() {
         return _portrait;
     }
@@ -203,6 +207,11 @@ public:
     *** re-calculated when an appropriately related stat is changed.
     **/
     //@{
+
+    void SetImageFile(const std::string filename) {
+        _image_file = filename;
+    }
+
     void SetHitPoints(uint32_t hp) {
         if(hp > _max_hit_points) _hit_points = _max_hit_points;
         else _hit_points = hp;
@@ -362,6 +371,8 @@ protected:
 
     //! \brief Used to know the sprite linked to the character in map mode.
     std::string _map_sprite_name;
+
+    std::string _image_file;
 
     //! \brief The character portrait
     vt_video::StillImage _portrait;

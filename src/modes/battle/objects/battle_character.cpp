@@ -62,7 +62,7 @@ BattleCharacter::BattleCharacter(GlobalCharacter *character) :
     std::string weapon_animation;
     if (_global_character->GetEquippedWeapon())
             weapon_animation = _global_character->GetEquippedWeapon()->GetWeaponAnimationFile(_global_character->GetID(), _sprite_animation_alias);
-    if (weapon_animation.empty() || !_current_weapon_animation.LoadFromAnimationScript(weapon_animation))
+    if (weapon_animation.empty() || !_current_weapon_animation.LoadFromAnimationScript(weapon_animation, _global_character->GetImageFile()))
         _current_weapon_animation.Clear();
 
     // Load the potential the ammo image filename
