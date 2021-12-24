@@ -1081,6 +1081,7 @@ void AnimatedImage::Clear()
 
 bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const std::string &animation_image_filename)
 {
+    std::cout << "FERNANDO: " << filename << " " << animation_image_filename << std::endl;
     vt_script::ReadScriptDescriptor image_script;
     if(!image_script.OpenFile(filename))
         return false;

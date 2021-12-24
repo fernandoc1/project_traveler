@@ -3,8 +3,6 @@
 
 animation = {
 
-	-- The file to load the frames from
-	image_filename = "data/new_assets/borghen-p0.png",
 	-- The number of rows and columns of images, will be used to compute
 	-- the images width and height, and also the frames number (row x col)
 	rows = 6,
