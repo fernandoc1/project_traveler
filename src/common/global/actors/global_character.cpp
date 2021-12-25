@@ -66,6 +66,7 @@ GlobalCharacter::GlobalCharacter(uint32_t id, bool initial) :
     }
 
     _name = MakeUnicodeString(char_script.ReadString("name"));
+    _image_file = char_script.ReadString("image_file");
 
     // Load all the graphic data
     std::string portrait_filename = char_script.ReadString("portrait");
