@@ -92,7 +92,7 @@ skills[1] = {
     BattleExecute = function(user, target)
         local target_actor = target:GetActor();
 
-        print("---->HERE<----");
+        -- Here is were sword animation is set --
 
         if (vt_battle.RndEvade(target_actor) == false) then
             -- Normal +0 attack

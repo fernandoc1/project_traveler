@@ -39,7 +39,6 @@ local slash_effect_started = false
 -- target, the BattleEnemy target
 -- The skill id used on target
 function Initialize(_character, _target, _skill)
-    print("--->DEBUG: INITIALIZE FUNCTION!!!!");
     -- Keep the reference in memory
     character = _character;
     target = _target;
@@ -55,8 +54,10 @@ function Initialize(_character, _target, _skill)
     character_pos_x = character:GetXLocation();
     character_pos_y = character:GetYLocation();
 
-    enemy_pos_x = target_actor:GetXLocation() - (character:GetSpriteWidth() / 2.0);
-    enemy_pos_y = target_actor:GetYLocation() - 5.0; -- Makes Bronann placed behind the enemy.
+    --enemy_pos_x = target_actor:GetXLocation() - (character:GetSpriteWidth() / 2.0);
+    --enemy_pos_y = target_actor:GetYLocation() - 5.0; -- Makes Bronann placed behind the enemy.
+    enemy_pos_x = target_actor:GetXLocation() + (character:GetSpriteWidth());
+    enemy_pos_y = target_actor:GetYLocation() + 5.0;
 
     attack_step = 0;
     attack_time = 0;
@@ -79,8 +80,8 @@ function Initialize(_character, _target, _skill)
         distance_moved_y = a_coeff * distance_moved_x;
     end
 
-    print("distance x: ", enemy_pos_x - character_pos_x)
-    print("distance y: ", character_pos_y - enemy_pos_y)
+    --print("distance x: ", enemy_pos_x - character_pos_x)
+    --print("distance y: ", character_pos_y - enemy_pos_y)
     --print (distance_moved_x, a_coeff, distance_moved_y);
 
     Battle = ModeManager:GetTop();
