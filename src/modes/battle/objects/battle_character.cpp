@@ -364,10 +364,8 @@ void BattleCharacter::ChangeSpriteAnimation(const std::string &alias)
     // Change the weapon animation as well
     // Add custom weapon animation
     std::string weapon_animation;
-    std::string character_image_file = _global_character->GetImageFile();
     if (_global_character->GetEquippedWeapon())
             weapon_animation = _global_character->GetEquippedWeapon()->GetWeaponAnimationFile(_global_character->GetID(), _sprite_animation_alias);
-    //if(alias != "run" && alias != "idle" && alias != "jump_forward" && alias != "jump_backward") {
     if (weapon_animation.empty() || (alias != "attack")) {
         _current_weapon_animation.Clear();
     } else {
