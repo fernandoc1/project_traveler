@@ -367,8 +367,12 @@ void BattleCharacter::ChangeSpriteAnimation(const std::string &alias)
     std::string character_image_file = _global_character->GetImageFile();
     if (_global_character->GetEquippedWeapon())
             weapon_animation = _global_character->GetEquippedWeapon()->GetWeaponAnimationFile(_global_character->GetID(), _sprite_animation_alias);
-    if (weapon_animation.empty() || !_current_weapon_animation.LoadFromAnimationScript(weapon_animation, character_image_file))
+    //if(alias != "run" && alias != "idle" && alias != "jump_forward" && alias != "jump_backward") {
+    if (weapon_animation.empty() || (alias != "attack")) {
         _current_weapon_animation.Clear();
+    } else {
+         _current_weapon_animation.LoadFromAnimationScript(weapon_animation);
+    }
 
     _current_sprite_animation->ResetAnimation();
     _current_weapon_animation.ResetAnimation();
