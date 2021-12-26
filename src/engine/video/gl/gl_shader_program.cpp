@@ -242,7 +242,7 @@ bool ShaderProgram::UpdateUniform(const std::string& uniform, const float* data,
             result = true;
 
             // The single variable case.
-            glUniform1d(location, data[1]);
+            glUniform1f(location, data[0]);
         }
     }
 

@@ -792,8 +792,8 @@ void VideoEngine::DrawSprite(gl::ShaderProgram* shader_program,
 
     shader_program->UpdateUniform("u_Color", color.GetColors(), 4);
 
-    //float angle[] = {M_PI/2.0};
-    //shader_program->UpdateUniform("u_Angle", angle, 1);
+    float angle[1] = {0};
+    shader_program->UpdateUniform("u_Angle", angle, 1);
 
     // Draw the sprite.
     _sprite->Draw(vertex_positions, vertex_texture_coordinates, vertex_colors);
