@@ -209,7 +209,7 @@ bool VideoEngine::FinalizeInitialization()
     // Create the shaders.
     gl::Shader* default_vertex =
         new gl::Shader(GL_VERTEX_SHADER,
-                       gl::shader_definitions::DEFAULT_VERTEX);
+                       gl::shader_definitions::getDefaultVertex());
     gl::Shader* solid_color_fragment =
         new gl::Shader(GL_FRAGMENT_SHADER,
                        gl::shader_definitions::SOLID_FRAGMENT);
@@ -791,6 +791,9 @@ void VideoEngine::DrawSprite(gl::ShaderProgram* shader_program,
     shader_program->UpdateUniform("u_Projection", buffer, 16);
 
     shader_program->UpdateUniform("u_Color", color.GetColors(), 4);
+
+    //float angle[] = {M_PI/2.0};
+    //shader_program->UpdateUniform("u_Angle", angle, 1);
 
     // Draw the sprite.
     _sprite->Draw(vertex_positions, vertex_texture_coordinates, vertex_colors);

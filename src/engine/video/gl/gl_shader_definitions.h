@@ -17,33 +17,15 @@
 #ifndef __GL_SHADER_DEFINITIONS_HEADER__
 #define __GL_SHADER_DEFINITIONS_HEADER__
 
+#include <iostream>
+
 namespace vt_video
 {
 namespace gl
 {
 namespace shader_definitions
 {
-    const char DEFAULT_VERTEX[] =
-        "#version 110\n"
-        "\n"
-        "//\n"
-        "// The default transformation pipeline.\n"
-        "//\n"
-        "\n"
-        "uniform mat4 u_Model;\n"
-        "uniform mat4 u_View;\n"
-        "uniform mat4 u_Projection;\n"
-        "\n"
-        "attribute vec3 in_Vertex;\n"
-        "attribute vec2 in_TexCoords;\n"
-        "attribute vec4 in_Color;\n"
-        "\n"
-        "void main()\n"
-        "{\n"
-        "    gl_Position       = u_Projection * (u_View * (u_Model * vec4(in_Vertex, 1.0)));\n"
-        "    gl_FrontColor     = in_Color;\n"
-        "    gl_TexCoord[0].xy = in_TexCoords.xy;\n"
-        "}\n";
+    const std::string getDefaultVertex();
 
     const char SOLID_FRAGMENT[] =
         "#version 110\n"

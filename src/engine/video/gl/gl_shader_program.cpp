@@ -225,7 +225,7 @@ bool ShaderProgram::UpdateUniform(const std::string& uniform, const float* data,
     GLint location = glGetUniformLocation(_program, uniform.c_str());
 
     // This function currently only supports matrices and vectors.
-    assert(data != nullptr && (length == 4 || length == 16));
+    assert(data != nullptr && (length == 4 || length == 16 || length == 1));
     if (data != nullptr) {
         if (length == 4) {
             result = true;
@@ -238,6 +238,11 @@ bool ShaderProgram::UpdateUniform(const std::string& uniform, const float* data,
 
             // The matrix case.
             glUniformMatrix4fv(location, 1, true, data);
+        } else if(length == 1) {
+            result = true;
+
+            // The single variable case.
+            glUniform1d(location, data[1]);
         }
     }
 

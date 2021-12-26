@@ -326,6 +326,7 @@ engine/input.cpp
 engine/engine_bindings.cpp
 engine/video/fade.cpp
 engine/video/gl/gl_particle_system.cpp
+engine/video/gl/gl_shader_definitions.cpp
 engine/video/gl/gl_render_target.cpp
 engine/video/gl/gl_shader.cpp
 engine/video/gl/gl_shader_program.cpp

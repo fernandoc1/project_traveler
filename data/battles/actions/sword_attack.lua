@@ -4,6 +4,7 @@
 animation = {
 
     -- The file to load the frames from
+    --image_filename = "data/battles/weapons/sword_attack.png",
     image_filename = "data/battles/weapons/sword_attack.png",
     -- The number of rows and columns of images, will be used to compute
     -- the images width and height, and also the frames number (row x col)
@@ -14,7 +15,7 @@ animation = {
     frame_height = 128.0,
     -- The frames duration in milliseconds
     frames = {
-        [0] = { id = 0, duration = 75 },
+        [0] = { id = 0, duration = 75 , rotation = 30},
         [1] = { id = 1, duration = 75 },
         [2] = { id = 2, duration = 75 },
         [3] = { id = 3, duration = 200 },
