@@ -15,16 +15,12 @@ animation = {
     frame_height = 64.0,
     -- The frames duration in milliseconds
     frames = {
-        [0] = { id = 0, duration = 200, rotation = 30 , x = 0.6, y = 0.5},
-        [1] = { id = 0, duration = 200, rotation = 45 , x = 0.6, y = 0.5},
-        [2] = { id = 0, duration = 200, rotation = 60 , x = 0.6, y = 0.5},
-        [3] = { id = 0, duration = 200, rotation = 75 , x = 0.6, y = 0.5},
-        [4] = { id = 0, duration = 200, rotation = 90 , x = 0.6, y = 0.5}, 
-        [5] = { id = 0, duration = 200, rotation = 105, x = 0.6, y = 0.5}, 
-        [6] = { id = 0, duration = 200, rotation = 120, x = 0.6, y = 0.5}, 
-        [7] = { id = 0, duration = 200, rotation = 135, x = 0.6, y = 0.5}, 
-        [8] = { id = 0, duration = 200, rotation = 150, x = 0.6, y = 0.5}, 
-        [9] = { id = 0, duration = 200, rotation = 165, x = 0.6, y = 0.5}, 
-        [10] = { id = 0, duration = 0, rotation = 165, x = 0.6, y = 0.5} 
+        [0] = { id = 0, duration = 100, rotation = -60, x = 0.50, y = 0.40}, 
+        [1] = { id = 0, duration = 100, rotation = -60, x = 0.60, y = 0.50}, 
+        [2] = { id = 0, duration = 100, rotation = -60, x = 0.70, y = 0.60}, 
+        [3] = { id = 0, duration = 100, rotation = -60, x = 0.80, y = 0.60}, 
+        [4] = { id = 0, duration = 100, rotation = -30, x = 0.90, y = 0.60}, 
+        [5] = { id = 0, duration = 100, rotation =   0, x = 1.00, y = 0.60}, 
+        [6] = { id = 0, duration = 0, rotation = 0, x = 1.00, y = 0.60} 
     }
 }
