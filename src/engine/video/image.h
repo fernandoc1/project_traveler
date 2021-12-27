@@ -509,6 +509,8 @@ public:
     //! \brief The amount of time to display this frame, in milliseconds
     uint32_t frame_time;
 
+    float rotation;
+
     //! \brief The StillImage used for this frame in the animation
     StillImage image;
 }; // class AnimationFrame
@@ -660,7 +662,7 @@ public:
     *** you always will want. For example, if your coordinate system is in terms of 32x32 pixel
     *** tiles, then a tile image would have a width and height of 1, not 32.
     **/
-    bool AddFrame(const std::string &frame, uint32_t frame_time);
+    bool AddFrame(const std::string &frame, uint32_t frame_time, float rotation = 0);
 
     /** \brief Adds an animation frame by using an existing static image.
     *** \param frame The still image to use as the frame image.
@@ -670,7 +672,7 @@ public:
     *** The frame argument should have at least one element prepared. Passing a StillImage
     *** that does not contain any image data will result in failure for this call.
     **/
-    bool AddFrame(const StillImage &frame, uint32_t frame_time);
+    bool AddFrame(const StillImage &frame, uint32_t frame_time, float rotation = 0);
 
     //! \name Class Member Access Functions
     //@{
