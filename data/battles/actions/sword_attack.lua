@@ -15,12 +15,10 @@ animation = {
     frame_height = 64.0,
     -- The frames duration in milliseconds
     frames = {
-        [0] = { id = 0, duration = 100, rotation = -60, x = 0.50, y = 0.40}, 
-        [1] = { id = 0, duration = 100, rotation = -60, x = 0.60, y = 0.50}, 
-        [2] = { id = 0, duration = 100, rotation = -60, x = 0.70, y = 0.60}, 
-        [3] = { id = 0, duration = 100, rotation = -60, x = 0.80, y = 0.60}, 
-        [4] = { id = 0, duration = 100, rotation = -30, x = 0.90, y = 0.60}, 
-        [5] = { id = 0, duration = 100, rotation =   0, x = 1.00, y = 0.60}, 
-        [6] = { id = 0, duration = 0, rotation = 0, x = 1.00, y = 0.60} 
+        [0] = { id = 0, duration = 30, rotation = -60, x = 0.50, y = 0.30}, 
+        [1] = { id = 0, duration = 30, rotation = -60, x = 0.60, y = 0.30}, 
+        [2] = { id = 0, duration = 30, rotation = -60, x = 0.70, y = 0.30}, 
+        [3] = { id = 0, duration = 30, rotation = -60, x = 0.80, y = 0.30}, 
+        [4] = { id = 0, duration = 0, rotation = 0, x = 0.80, y = 0.30} 
     }
 }

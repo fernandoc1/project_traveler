@@ -56,7 +56,7 @@ function Initialize(_character, _target, _skill)
 
     --enemy_pos_x = target_actor:GetXLocation() - (character:GetSpriteWidth() / 2.0);
     --enemy_pos_y = target_actor:GetYLocation() - 5.0; -- Makes Bronann placed behind the enemy.
-    enemy_pos_x = target_actor:GetXLocation() + (character:GetSpriteWidth());
+    enemy_pos_x = target_actor:GetXLocation() + (2.0 * character:GetSpriteWidth());
     enemy_pos_y = target_actor:GetYLocation() + 5.0;
 
     attack_step = 0;
