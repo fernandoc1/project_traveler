@@ -1155,10 +1155,7 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
 
         int32_t frame_id = image_script.ReadInt("id");
         int32_t frame_duration = image_script.ReadInt("duration");
-        int32_t rotation = image_script.ReadInt("rotation");
-        if(rotation > 0) {
-            std::cout << "FOUND: " << rotation << std::endl; 
-        }
+        float rotation = (vt_utils::UTILS_PI * image_script.ReadFloat("rotation") / 180.0f);
 
         // Loads the frame offsets
         float x_offset = 0.0f;

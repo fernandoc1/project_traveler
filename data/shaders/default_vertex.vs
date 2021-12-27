@@ -21,7 +21,7 @@ vec4(0.0,         0.0,        0.0, 1.0));
 
 void main()
 {
-    gl_Position       = u_Projection * (u_View * (u_Model * vec4(in_Vertex, 1.0))) * u_Rotation;
+    gl_Position       = u_Projection * (u_View * (u_Model * u_Rotation * vec4(in_Vertex, 1.0)));
     gl_FrontColor     = in_Color;
     gl_TexCoord[0].xy = in_TexCoords.xy;
 }
