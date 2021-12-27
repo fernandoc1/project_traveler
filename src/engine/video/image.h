@@ -124,6 +124,10 @@ public:
         return _height;
     }
 
+    virtual float GetRotation() const {
+        return _rotation;
+    }
+
     //! \brief Empty update function permitting better abstraction between StillImage and AnimatedImage.
     virtual void Update()
     {}
@@ -136,6 +140,10 @@ public:
     //! \brief Returns true if the image is grayscale.
     bool IsGrayscale() const {
         return _grayscale;
+    }
+
+    void SetRotation(float rotation) {
+        _rotation = rotation;
     }
 
     //! \brief Sets whether the image should be grayscaled.
@@ -289,6 +297,8 @@ protected:
 
     //! \brief Whether the image should be smoothed.
     bool _smooth;
+
+    float _rotation;
 
     /** \brief Removes a reference to _texture, and frees or deletes it if it has no remaining references
     ***
@@ -474,6 +484,7 @@ public:
     void SetStatic(bool is_static) override {
         _is_static = is_static;
     }
+
     //@}
 
 protected:
@@ -508,8 +519,6 @@ class AnimationFrame
 public:
     //! \brief The amount of time to display this frame, in milliseconds
     uint32_t frame_time;
-
-    float rotation;
 
     //! \brief The StillImage used for this frame in the animation
     StillImage image;
@@ -662,7 +671,7 @@ public:
     *** you always will want. For example, if your coordinate system is in terms of 32x32 pixel
     *** tiles, then a tile image would have a width and height of 1, not 32.
     **/
-    bool AddFrame(const std::string &frame, uint32_t frame_time, float rotation = 0);
+    bool AddFrame(const std::string &frame, uint32_t frame_time);
 
     /** \brief Adds an animation frame by using an existing static image.
     *** \param frame The still image to use as the frame image.
@@ -672,7 +681,7 @@ public:
     *** The frame argument should have at least one element prepared. Passing a StillImage
     *** that does not contain any image data will result in failure for this call.
     **/
-    bool AddFrame(const StillImage &frame, uint32_t frame_time, float rotation = 0);
+    bool AddFrame(const StillImage &frame, uint32_t frame_time);
 
     //! \name Class Member Access Functions
     //@{

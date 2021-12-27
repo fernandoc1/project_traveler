@@ -1140,6 +1140,7 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
     std::vector<uint32_t> frames_ids;
     std::vector<uint32_t> frames_duration;
     std::vector<std::pair<float, float> > frames_offsets;
+    std::vector<float> frames_rotation;
 
     image_script.OpenTable("frames");
     uint32_t num_frames = image_script.GetTableSize();
@@ -1172,6 +1173,7 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
         frames_ids.push_back((uint32_t)frame_id);
         frames_duration.push_back((uint32_t)frame_duration);
         frames_offsets.push_back(std::make_pair(x_offset, y_offset));
+        frames_rotation.push_back(rotation);
 
         image_script.CloseTable(); // frames[frame_table_id] table
     }
@@ -1190,8 +1192,10 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
     // Once copied and only at that time, setup the data offsets to avoid the case
     // where the offsets might be applied several times on the same origin image,
     // breaking the offset resizing when the dimensions are different from the original image.
-    for (uint32_t i = 0; i < _frames.size(); ++i)
+    for (uint32_t i = 0; i < _frames.size(); ++i) {
         _frames[i].image.SetDrawOffsets(frames_offsets[i].first, frames_offsets[i].second);
+        _frames[i].image.SetRotation(frames_rotation[i]);
+    }
 
     // Then only, set the dimensions
     SetDimensions(frame_width, frame_height);
@@ -1385,7 +1389,7 @@ void AnimatedImage::Update(uint32_t elapsed_time)
     }
 }
 
-bool AnimatedImage::AddFrame(const std::string &frame, uint32_t frame_time, float rotation)
+bool AnimatedImage::AddFrame(const std::string &frame, uint32_t frame_time)
 {
     StillImage img;
     img.SetStatic(_is_static);
@@ -1397,13 +1401,13 @@ bool AnimatedImage::AddFrame(const std::string &frame, uint32_t frame_time, floa
     AnimationFrame new_frame;
     new_frame.frame_time = frame_time;
     new_frame.image = img;
-    new_frame.rotation = rotation;
+
     _frames.push_back(new_frame);
     _animation_time += frame_time;
     return true;
 }
 
-bool AnimatedImage::AddFrame(const StillImage &frame, uint32_t frame_time, float rotation)
+bool AnimatedImage::AddFrame(const StillImage &frame, uint32_t frame_time)
 {
     if(!frame._image_texture) {
         PRINT_WARNING << "The StillImage argument did not contain any image elements" << std::endl;
@@ -1413,7 +1417,7 @@ bool AnimatedImage::AddFrame(const StillImage &frame, uint32_t frame_time, float
     AnimationFrame new_frame;
     new_frame.image = frame;
     new_frame.frame_time = frame_time;
-    new_frame.rotation = rotation;
+
     _frames.push_back(new_frame);
     _animation_time += frame_time;
     return true;
