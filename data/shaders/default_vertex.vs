@@ -9,6 +9,9 @@ uniform mat4 u_View;
 uniform mat4 u_Projection;
 uniform float u_Angle;
 
+uniform float u_tx;
+uniform float u_ty;
+
 attribute vec3 in_Vertex;
 attribute vec2 in_TexCoords;
 attribute vec4 in_Color;
@@ -19,9 +22,15 @@ vec4(sin(u_Angle),  cos(u_Angle), 0.0, 0.0),
 vec4(0.0,         0.0,        1.0, 0.0),
 vec4(0.0,         0.0,        0.0, 1.0));
 
+mat4 u_Translation = mat4(
+vec4(1.0,  0.0,  0.0, 0.0),
+vec4(0.0,  1.0,  0.0, 0.0),
+vec4(0.0,  0.0,  1.0, 0.0),
+vec4(u_tx, u_ty, 0.0, 1.0));
+
 void main()
 {
-    gl_Position       = u_Projection * (u_View * (u_Model * u_Rotation * vec4(in_Vertex, 1.0)));
+    gl_Position       = u_Projection * (u_View * (u_Model * u_Translation * u_Rotation * vec4(in_Vertex, 1.0)));
     gl_FrontColor     = in_Color;
     gl_TexCoord[0].xy = in_TexCoords.xy;
 }

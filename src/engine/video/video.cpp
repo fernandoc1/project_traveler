@@ -796,6 +796,12 @@ void VideoEngine::DrawSprite(gl::ShaderProgram* shader_program,
     float angle[1] = {properties.rotation};
     shader_program->UpdateUniform("u_Angle", angle, 1);
 
+    float tx[1] = {properties.xTranslation};
+    shader_program->UpdateUniform("u_tx", tx, 1);
+
+    float ty[1] = {properties.yTranslation};
+    shader_program->UpdateUniform("u_ty", ty, 1);
+
     // Draw the sprite.
     _sprite->Draw(vertex_positions, vertex_texture_coordinates, vertex_colors);
 }

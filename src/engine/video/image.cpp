@@ -1157,6 +1157,8 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
         int32_t frame_duration = image_script.ReadInt("duration");
         ImageDescriptorProperties props;
         props.rotation = (vt_utils::UTILS_PI * image_script.ReadFloat("rotation") / 180.0f);
+        props.xTranslation = image_script.ReadFloat("x");
+        props.yTranslation = image_script.ReadFloat("y");
 
         // Loads the frame offsets
         float x_offset = 0.0f;

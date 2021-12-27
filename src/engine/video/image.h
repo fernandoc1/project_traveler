@@ -66,14 +66,14 @@ namespace vt_video
 
 struct ImageDescriptorProperties {
     float rotation;
-    int xTranslation;
-    int yTranslation;
+    float xTranslation;
+    float yTranslation;
 
     ImageDescriptorProperties() 
         : rotation(0.0f)
-        , xTranslation(0)
-        , yTranslation(0)
-    {std::cout << "New properties" << std::endl;}
+        , xTranslation(0.0f)
+        , yTranslation(0.0f)
+    {}
 };
 
 class StillImage;
