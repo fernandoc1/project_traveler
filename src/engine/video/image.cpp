@@ -52,7 +52,8 @@ ImageDescriptor::ImageDescriptor() :
     _unichrome_vertices(true),
     _is_static(false),
     _grayscale(false),
-    _smooth(true)
+    _smooth(true),
+    _rotation(0.0f)
 {
     _color[0] = _color[1] = _color[2] = _color[3] = Color::white;
 }
@@ -88,7 +89,8 @@ ImageDescriptor::ImageDescriptor(const ImageDescriptor &copy) :
     _unichrome_vertices(copy._unichrome_vertices),
     _is_static(copy._is_static),
     _grayscale(copy._grayscale),
-    _smooth(copy._smooth)
+    _smooth(copy._smooth),
+    _rotation(copy._rotation)
 {
     _color[0] = copy._color[0];
     _color[1] = copy._color[1];
@@ -123,6 +125,7 @@ ImageDescriptor &ImageDescriptor::operator=(const ImageDescriptor &copy)
     _color[1] = copy._color[1];
     _color[2] = copy._color[2];
     _color[3] = copy._color[3];
+    _rotation = copy._rotation;
 
 
     // Update the reference to the previous image texturee
@@ -164,6 +167,7 @@ void ImageDescriptor::Clear()
     _is_static = false;
     _grayscale = false;
     _smooth = true;
+    _rotation = 0.0f;
 }
 
 
@@ -640,7 +644,7 @@ void ImageDescriptor::_DrawTexture(const Color* draw_color) const
 
     if (_unichrome_vertices) {
         // Draw the image.
-        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, *draw_color);
+        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, *draw_color, _rotation);
     } else {
         // For each of the four vertices.
         for (unsigned i = 0; i < 4; ++i)
@@ -663,7 +667,7 @@ void ImageDescriptor::_DrawTexture(const Color* draw_color) const
         assert(shader_program != nullptr);
 
         // Draw the image.
-        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors);
+        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, ::vt_video::Color::white, _rotation);
     }
 
     // Unload the shader program.
@@ -811,6 +815,7 @@ void StillImage::Clear()
     _image_texture = nullptr;
     _offset.x = 0.0f;
     _offset.y = 0.0f;
+    _rotation = 0.0f;
 }
 
 bool StillImage::Load(const std::string &filename)
@@ -823,6 +828,7 @@ bool StillImage::Load(const std::string &filename)
         _height = 0.0f;
         _offset.x = 0.0f;
         _offset.y = 0.0f;
+        _rotation = 0.0f;
     }
 
     _filename = filename;

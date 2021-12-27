@@ -341,7 +341,8 @@ public:
                     float* vertex_positions,
                     float* vertex_texture_coordinates,
                     float* vertex_colors,
-                    const Color& color = ::vt_video::Color::white);
+                    const Color& color = ::vt_video::Color::white,
+                    float rotation = 0);
 
     /** \brief Enables the scissoring effect in the video engine
     *** Scissoring is where you can specify a rectangle of the screen which is affected
