@@ -54,6 +54,8 @@
 
 #include "common/position_2d.h"
 
+#include <iostream>
+
 namespace vt_mode_manager
 {
 class ParticleSystem;
@@ -61,6 +63,18 @@ class ParticleSystem;
 
 namespace vt_video
 {
+
+struct ImageDescriptorProperties {
+    float rotation;
+    int xTranslation;
+    int yTranslation;
+
+    ImageDescriptorProperties() 
+        : rotation(0.0f)
+        , xTranslation(0)
+        , yTranslation(0)
+    {std::cout << "New properties" << std::endl;}
+};
 
 class StillImage;
 
@@ -124,8 +138,8 @@ public:
         return _height;
     }
 
-    virtual float GetRotation() const {
-        return _rotation;
+    virtual ImageDescriptorProperties GetProperties() const {
+        return _properties;
     }
 
     //! \brief Empty update function permitting better abstraction between StillImage and AnimatedImage.
@@ -142,8 +156,8 @@ public:
         return _grayscale;
     }
 
-    void SetRotation(float rotation) {
-        _rotation = rotation;
+    void SetImageProperties(ImageDescriptorProperties properties) {
+        _properties = properties;
     }
 
     //! \brief Sets whether the image should be grayscaled.
@@ -298,7 +312,7 @@ protected:
     //! \brief Whether the image should be smoothed.
     bool _smooth;
 
-    float _rotation;
+    ImageDescriptorProperties _properties;
 
     /** \brief Removes a reference to _texture, and frees or deletes it if it has no remaining references
     ***

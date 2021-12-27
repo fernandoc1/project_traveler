@@ -53,7 +53,7 @@ ImageDescriptor::ImageDescriptor() :
     _is_static(false),
     _grayscale(false),
     _smooth(true),
-    _rotation(0.0f)
+    _properties()
 {
     _color[0] = _color[1] = _color[2] = _color[3] = Color::white;
 }
@@ -90,7 +90,7 @@ ImageDescriptor::ImageDescriptor(const ImageDescriptor &copy) :
     _is_static(copy._is_static),
     _grayscale(copy._grayscale),
     _smooth(copy._smooth),
-    _rotation(copy._rotation)
+    _properties(copy._properties)
 {
     _color[0] = copy._color[0];
     _color[1] = copy._color[1];
@@ -125,7 +125,7 @@ ImageDescriptor &ImageDescriptor::operator=(const ImageDescriptor &copy)
     _color[1] = copy._color[1];
     _color[2] = copy._color[2];
     _color[3] = copy._color[3];
-    _rotation = copy._rotation;
+    _properties = copy._properties;
 
 
     // Update the reference to the previous image texturee
@@ -167,7 +167,7 @@ void ImageDescriptor::Clear()
     _is_static = false;
     _grayscale = false;
     _smooth = true;
-    _rotation = 0.0f;
+    _properties = ImageDescriptorProperties();
 }
 
 
@@ -644,7 +644,7 @@ void ImageDescriptor::_DrawTexture(const Color* draw_color) const
 
     if (_unichrome_vertices) {
         // Draw the image.
-        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, *draw_color, _rotation);
+        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, *draw_color, _properties);
     } else {
         // For each of the four vertices.
         for (unsigned i = 0; i < 4; ++i)
@@ -667,7 +667,7 @@ void ImageDescriptor::_DrawTexture(const Color* draw_color) const
         assert(shader_program != nullptr);
 
         // Draw the image.
-        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, ::vt_video::Color::white, _rotation);
+        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, ::vt_video::Color::white, _properties);
     }
 
     // Unload the shader program.
@@ -815,7 +815,7 @@ void StillImage::Clear()
     _image_texture = nullptr;
     _offset.x = 0.0f;
     _offset.y = 0.0f;
-    _rotation = 0.0f;
+    _properties = ImageDescriptorProperties();
 }
 
 bool StillImage::Load(const std::string &filename)
@@ -828,7 +828,7 @@ bool StillImage::Load(const std::string &filename)
         _height = 0.0f;
         _offset.x = 0.0f;
         _offset.y = 0.0f;
-        _rotation = 0.0f;
+        _properties = ImageDescriptorProperties();
     }
 
     _filename = filename;
@@ -1146,7 +1146,7 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
     std::vector<uint32_t> frames_ids;
     std::vector<uint32_t> frames_duration;
     std::vector<std::pair<float, float> > frames_offsets;
-    std::vector<float> frames_rotation;
+    std::vector<ImageDescriptorProperties> frames_properties;
 
     image_script.OpenTable("frames");
     uint32_t num_frames = image_script.GetTableSize();
@@ -1155,7 +1155,8 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
 
         int32_t frame_id = image_script.ReadInt("id");
         int32_t frame_duration = image_script.ReadInt("duration");
-        float rotation = (vt_utils::UTILS_PI * image_script.ReadFloat("rotation") / 180.0f);
+        ImageDescriptorProperties props;
+        props.rotation = (vt_utils::UTILS_PI * image_script.ReadFloat("rotation") / 180.0f);
 
         // Loads the frame offsets
         float x_offset = 0.0f;
@@ -1176,7 +1177,7 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
         frames_ids.push_back((uint32_t)frame_id);
         frames_duration.push_back((uint32_t)frame_duration);
         frames_offsets.push_back(std::make_pair(x_offset, y_offset));
-        frames_rotation.push_back(rotation);
+        frames_properties.push_back(props);
 
         image_script.CloseTable(); // frames[frame_table_id] table
     }
@@ -1197,7 +1198,7 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
     // breaking the offset resizing when the dimensions are different from the original image.
     for (uint32_t i = 0; i < _frames.size(); ++i) {
         _frames[i].image.SetDrawOffsets(frames_offsets[i].first, frames_offsets[i].second);
-        _frames[i].image.SetRotation(frames_rotation[i]);
+        _frames[i].image.SetImageProperties(frames_properties[i]);
     }
 
     // Then only, set the dimensions

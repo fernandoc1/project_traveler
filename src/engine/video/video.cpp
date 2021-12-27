@@ -771,7 +771,7 @@ void VideoEngine::DrawSprite(gl::ShaderProgram* shader_program,
                              float* vertex_texture_coordinates,
                              float* vertex_colors,
                              const Color& color,
-                             float rotation)
+                             ImageDescriptorProperties properties)
 {
     assert(_sprite != nullptr);
     assert(shader_program != nullptr);
@@ -793,7 +793,7 @@ void VideoEngine::DrawSprite(gl::ShaderProgram* shader_program,
 
     shader_program->UpdateUniform("u_Color", color.GetColors(), 4);
 
-    float angle[1] = {rotation};
+    float angle[1] = {properties.rotation};
     shader_program->UpdateUniform("u_Angle", angle, 1);
 
     // Draw the sprite.
