@@ -73,36 +73,17 @@ weapons[10001] = {
 
     battle_animations = {
         [BORGHEN] = default_battle_animations;
-        [BRONANN] = {
-            idle = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_idle.lua",
-            run = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_run.lua",
-            run_after_victory = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_run_after_victory.lua",
-            attack = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_attack.lua",
-            attack_forward_thrust = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_attack_forward_thrust.lua",
-            dodge = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_dodge.lua",
-            victory = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_victory.lua",
-            hurt = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_hurt.lua",
-            poor = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_kneeling.lua",
-            dying = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_kneeling.lua",
-            dead = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_dead.lua",
-            revive = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_kneeling.lua",
-            item = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_idle.lua",
-            magic_prepare = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_magic_prepare.lua",
-            magic_cast = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_magic_cast.lua",
-            jump_forward = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_jump_forward.lua",
-            jump_backward = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_hurt.lua"
-        }
     }
 }
 
 weapons[10002] = {
-    name = vt_system.Translate("Hardened Practice Sword"),
+    name = vt_system.Translate("Aerith wand"),
     description = vt_system.Translate("A sword made of wood with a steel hilt, very good for practising."),
-    icon = "data/inventory/weapons/woodensword.png",
-    physical_attack = 25,
+    icon = "data/inventory/battle_weapon/wand.png",
+    physical_attack = 2,
     magical_attack = 0,
     standard_price = 250,
-    usable_by = BRONANN + THANIS,
+    usable_by = BRONANN + THANIS + AERITH,
     slots = 0,
     key_item = false,
 
@@ -114,25 +95,8 @@ weapons[10002] = {
     },
 
     battle_animations = {
-        [BRONANN] = {
-            idle = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_idle.lua",
-            run = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_run.lua",
-            run_after_victory = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_run_after_victory.lua",
-            attack = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_attack.lua",
-            attack_forward_thrust = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_attack_forward_thrust.lua",
-            dodge = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_dodge.lua",
-            victory = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_victory.lua",
-            hurt = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_hurt.lua",
-            poor = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_kneeling.lua",
-            dying = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_kneeling.lua",
-            dead = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_dead.lua",
-            revive = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_kneeling.lua",
-            item = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_idle.lua",
-            magic_prepare = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_magic_prepare.lua",
-            magic_cast = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_magic_cast.lua",
-            jump_forward = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_jump_forward.lua",
-            jump_backward = "data/entities/battle/characters/bronann/weapons/wood_bronze/bronann_hurt.lua"
-        }
+        [BORGHEN] = default_battle_animations;
+        [AERITH] = default_battle_animations;
     }
 }
 
