@@ -19,6 +19,8 @@ animation = {
         [1] = { id = 0, duration = 25, rotation = -60, x = 0.60, y = 0.30}, 
         [2] = { id = 0, duration = 25, rotation = -60, x = 0.70, y = 0.30}, 
         [3] = { id = 0, duration = 25, rotation = -60, x = 0.80, y = 0.30}, 
+        [3] = { id = 0, duration = 35, rotation = -30, x = 0.80, y = 0.30}, 
+        [3] = { id = 0, duration = 35, rotation = -15, x = 0.80, y = 0.30}, 
         [4] = { id = 0, duration = 0, rotation = 0, x = 0.80, y = 0.30} 
     }
 }
