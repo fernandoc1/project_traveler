@@ -63,15 +63,13 @@ default_battle_animations = {
 weapons[10001] = {
     name = vt_system.Translate("Wooden Sword"),
     description = vt_system.Translate("A sword made of wood with a steel hilt, very good for practising."),
-    icon = "data/inventory/weapons/woodensword.png",
+    icon = "data/inventory/battle_weapon/sword.png",
     physical_attack = 2,
     magical_attack = 0,
     standard_price = 0,
     usable_by = BRONANN + THANIS,
     slots = 0,
     key_item = true,
-
-    image_file = "data/entities/character_sprites/borghen-p0.png",
 
     battle_animations = {
         [BORGHEN] = default_battle_animations;
