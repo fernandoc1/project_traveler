@@ -322,10 +322,10 @@ characters[AERITH] = {
     battle_animations = default_battle_animations;
 
     initial_stats = {
-        experience_level = 1,
-        experience_points = 0,
+        experience_level = 3,
+        experience_points = 140,
         max_hit_points = 62,
-        max_skill_points = 8,
+        max_skill_points = 30,
         phys_atk = 12,
         mag_atk = 4,
         phys_def = 15,
@@ -395,7 +395,7 @@ characters[AERITH] = {
     bare_hands_skills = { 30001 },
 
     -- [character level] = skill_id learned.
-    skills = { [1] = 1, [2] = 2, [8] = 3, [16] = 10003, [32] = 4, [64] = 10004, [100] = 6}
+    skills = { [1] = 1, [2] = 2, [3] = 10002, [16] = 10003, [32] = 4, [64] = 10004, [100] = 6}
 } -- characters[AERITH]
 
 characters[BRONANN] = {

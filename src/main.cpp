@@ -608,7 +608,6 @@ int main(int argc, char* argv[])
     vt_battle::BattleMode* battleMode = new vt_battle::BattleMode();
     battleMode->AddEnemy(4);
     battleMode->AddEnemy(4);
-    battleMode->AddEnemy(4);
 
     GlobalManager->GetCharacterHandler().AddCharacter(1);
     GlobalManager->GetCharacterHandler().AddCharacter(2);
