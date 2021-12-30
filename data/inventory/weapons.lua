@@ -67,12 +67,13 @@ weapons[10001] = {
     physical_attack = 2,
     magical_attack = 0,
     standard_price = 0,
-    usable_by = BRONANN + THANIS,
+    usable_by = BRONANN + THANIS + AERITH,
     slots = 0,
     key_item = true,
 
     battle_animations = {
         [BORGHEN] = default_battle_animations;
+        [AERITH] = default_battle_animations;
     }
 }
 
