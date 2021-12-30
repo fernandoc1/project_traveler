@@ -107,8 +107,7 @@ skills[1] = {
     animation_scripts = {
         [BORGHEN] = "data/battles/actions/weapon_attack.lua", 
         [AERITH]  = "data/battles/actions/weapon_attack.lua", 
-        [BRONANN] ="data/battles/characters_animations/bronann_attack.lua", 
-        [THANIS] = "data/battles/characters_animations/thanis_attack.lua"
+        [SETZER]  = "data/battles/actions/weapon_attack.lua" 
     }
 }
 
@@ -138,9 +137,7 @@ skills[2] = {
     animation_scripts = {
         [BORGHEN] = "data/battles/actions/weapon_attack.lua",
         [AERITH]  = "data/battles/actions/weapon_attack.lua", 
-        [BRONANN] = "data/battles/characters_animations/bronann_attack_forward_thrust.lua",
-        [KALYA] = "data/battles/characters_animations/kalya_double_attack.lua",
-        [THANIS] = "data/battles/characters_animations/thanis_attack.lua"
+        [SETZER]  = "data/battles/actions/weapon_attack.lua" 
     }
 }
 
@@ -174,9 +171,7 @@ skills[3] = {
     animation_scripts = {
         [BORGHEN] = "data/battles/actions/weapon_attack.lua",
         [AERITH]  = "data/battles/actions/weapon_attack.lua", 
-        [BRONANN] = "data/battles/characters_animations/bronann_attack.lua",
-        [KALYA] = "data/battles/characters_animations/kalya_attack.lua",
-        [THANIS] = "data/battles/characters_animations/thanis_attack.lua"
+        [SETZER]  = "data/battles/actions/weapon_attack.lua" 
     }
 }
 

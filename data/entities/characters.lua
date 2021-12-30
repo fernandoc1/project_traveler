@@ -148,7 +148,7 @@ characters[SETZER] = {
         mag_def = 6,
         stamina = 30,
         evade = 5.0,
-        weapon = 0,
+        weapon = 10003,
         head_armor = 0,
         torso_armor = 30001,
         arm_armor = 0,
@@ -211,7 +211,7 @@ characters[SETZER] = {
     bare_hands_skills = { 30001 },
 
     -- [character level] = skill_id learned.
-    skills = { [1] = 1, [2] = 2, [1] = 10002, [8] = 3, [16] = 10003, [32] = 4, [64] = 10004, [100] = 6 }
+    skills = { [1] = 1, [2] = 2, [8] = 3, [16] = 10003, [32] = 4, [64] = 10004, [100] = 6 }
 } -- characters[SETZER]
 
 characters[AERITH] = {
@@ -303,7 +303,7 @@ characters[AERITH] = {
     bare_hands_skills = { 30001 },
 
     -- [character level] = skill_id learned.
-    skills = { [1] = 1, [2] = 2, [3] = 10002, [8] = 3, [16] = 10003, [32] = 4, [64] = 10004, [100] = 6 }
+    skills = { [1] = 1, [2] = 2, [8] = 3, [16] = 10003, [32] = 4, [64] = 10004, [100] = 6}
 } -- characters[AERITH]
 
 characters[BRONANN] = {
