@@ -107,6 +107,7 @@ skills[1] = {
     animation_scripts = {
         [BORGHEN] = "data/battles/actions/weapon_attack.lua", 
         [AERITH]  = "data/battles/actions/weapon_attack.lua", 
+        [GOLBEZ]  = "data/battles/actions/weapon_attack.lua", 
         [SETZER]  = "data/battles/actions/weapon_attack.lua" 
     }
 }

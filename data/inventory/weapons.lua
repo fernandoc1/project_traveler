@@ -74,6 +74,7 @@ weapons[10001] = {
 
     battle_animations = {
         [BORGHEN] = default_battle_animations;
+        [GOLBEZ] = default_battle_animations;
         [AERITH] = default_battle_animations;
     }
 }
@@ -100,6 +101,7 @@ weapons[10002] = {
     battle_animations = {
         [BORGHEN] = default_battle_animations;
         [AERITH] = default_battle_animations;
+        [GOLBEZ] = default_battle_animations;
     }
 }
 

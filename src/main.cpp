@@ -606,13 +606,14 @@ int main(int argc, char* argv[])
     //ModeManager->Push(new BootMode(), false, true);
 
     vt_battle::BattleMode* battleMode = new vt_battle::BattleMode();
-    battleMode->AddEnemy(1);
-    battleMode->AddEnemy(1);
-    battleMode->AddEnemy(1);
+    battleMode->AddEnemy(4);
+    battleMode->AddEnemy(4);
+    battleMode->AddEnemy(4);
 
     GlobalManager->GetCharacterHandler().AddCharacter(1);
     GlobalManager->GetCharacterHandler().AddCharacter(2);
-    GlobalManager->GetCharacterHandler().AddCharacter(3);
+    GlobalManager->GetCharacterHandler().AddCharacter(4);
+    GlobalManager->GetCharacterHandler().AddCharacter(8);
 
     ModeManager->Push(battleMode, false, false);
 
