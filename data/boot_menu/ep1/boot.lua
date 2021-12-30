@@ -26,6 +26,21 @@ local flare_image = nil
 
 -- Init all the needed variables
 function Initialize(boot_instance)
+    --Look at data/debug/debug_battle.lua for more details.
+    local battle = vt_battle.BattleMode()
+    battle:AddEnemy(4, 0, 0)
+    --battle:AddEnemy(4, 0, 0)
+
+    GlobalManager:GetCharacterHandler():AddCharacter(BORGHEN);
+    GlobalManager:GetCharacterHandler():AddCharacter(AERITH);
+    GlobalManager:GetCharacterHandler():AddCharacter(SETZER);
+    GlobalManager:GetCharacterHandler():AddCharacter(GOLBEZ);
+
+    ModeManager:Push(battle, false, false)
+
+end
+
+function OldInitialize(boot_instance)
     Boot = boot_instance;
     Script = Boot:GetScriptSupervisor();
 
@@ -273,7 +288,7 @@ function DrawBackground()
     -- The background image
     background_color:SetAlpha(bckgrnd_alpha);
     VideoManager:Move(0.0, 0.0);
-    background_image:Draw(background_color);
+    --background_image:Draw(background_color);
 
     -- The passing clouds
     cloud_color:SetAlpha(0.6 * bckgrnd_alpha);
@@ -297,8 +312,8 @@ function DrawPostEffects()
     mist_color:SetAlpha(bckgrnd_alpha * 0.6);
     fog_color:SetAlpha(bckgrnd_alpha * 0.8);
     VideoManager:Move(0.0, 0.0);
-    mist_image:Draw(mist_color);
-    fog_image:Draw(fog_color);
+    --mist_image:Draw(mist_color);
+    --fog_image:Draw(fog_color);
 
     sat_shadow_color:SetAlpha(bckgrnd_alpha * 0.3);
     sat_color:SetAlpha(bckgrnd_alpha * 0.7);
@@ -306,10 +321,10 @@ function DrawPostEffects()
     -- satellite behind
     if (sat1_behind) then
         VideoManager:Move(640.0 + sat1_decay + (sat1_x_position / 2.0), 438.0 + (sat1_x_position / 3.0));
-        satellite_shadow_image:Draw(sat_shadow_color);
+        --satellite_shadow_image:Draw(sat_shadow_color);
 
         VideoManager:Move(448.0 + sat1_x_position, 368.0 - sat1_decay);
-        satellite_image:Draw(sat_color);
+        --satellite_image:Draw(sat_color);
     end
     if (sat2_behind) then
         VideoManager:Move(640.0 + sat2_decay + (sat2_x_position / 2.0), 438.0 + (sat2_x_position / 3.0));

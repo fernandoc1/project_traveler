@@ -603,18 +603,7 @@ int main(int argc, char* argv[])
     SDL_SetWindowTitle(sdl_window, app_fullname.c_str());
     SDL_ShowWindow(sdl_window);
 
-    //ModeManager->Push(new BootMode(), false, true);
-
-    vt_battle::BattleMode* battleMode = new vt_battle::BattleMode();
-    battleMode->AddEnemy(4);
-    battleMode->AddEnemy(4);
-
-    GlobalManager->GetCharacterHandler().AddCharacter(1);
-    GlobalManager->GetCharacterHandler().AddCharacter(2);
-    GlobalManager->GetCharacterHandler().AddCharacter(4);
-    GlobalManager->GetCharacterHandler().AddCharacter(8);
-
-    ModeManager->Push(battleMode, false, false);
+    ModeManager->Push(new BootMode(), false, true);
 
     // Used for a variable game speed,
     // sleeping when on sufficiently fast hardware, and max FPS.
