@@ -160,7 +160,7 @@ public:
         return _grayscale;
     }
 
-    void SetImageProperties(ImageDescriptorProperties properties) {
+    void SetProperties(ImageDescriptorProperties properties) {
         _properties = properties;
     }
 
@@ -535,8 +535,6 @@ namespace private_video
 class AnimationFrame
 {
 public:
-    ImageDescriptorProperties properties;
-
     //! \brief The amount of time to display this frame, in milliseconds
     uint32_t frame_time;
 

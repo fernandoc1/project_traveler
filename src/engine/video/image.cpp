@@ -1202,7 +1202,7 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
     // breaking the offset resizing when the dimensions are different from the original image.
     for (uint32_t i = 0; i < _frames.size(); ++i) {
         _frames[i].image.SetDrawOffsets(frames_offsets[i].first, frames_offsets[i].second);
-        _frames[i].image.SetImageProperties(frames_properties[i]);
+        _frames[i].image.SetProperties(frames_properties[i]);
     }
 
     // Then only, set the dimensions
@@ -1409,8 +1409,8 @@ bool AnimatedImage::AddFrame(const std::string &frame, uint32_t frame_time, Imag
     AnimationFrame new_frame;
     new_frame.frame_time = frame_time;
     new_frame.image = img;
-    new_frame.properties = frame_properties;
-    
+    new_frame.image.SetProperties(frame_properties);
+
     _frames.push_back(new_frame);
     _animation_time += frame_time;
     return true;
@@ -1426,7 +1426,7 @@ bool AnimatedImage::AddFrame(const StillImage &frame, uint32_t frame_time, Image
     AnimationFrame new_frame;
     new_frame.image = frame;
     new_frame.frame_time = frame_time;
-    new_frame.properties = frame_properties;
+    new_frame.image.SetProperties(frame_properties);
 
     _frames.push_back(new_frame);
     _animation_time += frame_time;
