@@ -65,12 +65,16 @@ namespace vt_video
 {
 
 struct ImageDescriptorProperties {
-    float rotation;
+    float rotationX;
+    float rotationY;
+    float rotationZ;
     float xTranslation;
     float yTranslation;
 
     ImageDescriptorProperties() 
-        : rotation(0.0f)
+        : rotationX(0.0f)
+        , rotationY(0.0f)
+        , rotationZ(0.0f)
         , xTranslation(0.0f)
         , yTranslation(0.0f)
     {}

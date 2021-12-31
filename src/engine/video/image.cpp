@@ -1156,7 +1156,9 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
         int32_t frame_id = image_script.ReadInt("id");
         int32_t frame_duration = image_script.ReadInt("duration");
         ImageDescriptorProperties props;
-        props.rotation = (vt_utils::UTILS_PI * image_script.ReadFloat("rotation") / 180.0f);
+        props.rotationX = (vt_utils::UTILS_PI * image_script.ReadFloat("rotationX") / 180.0f);
+        props.rotationY = (vt_utils::UTILS_PI * image_script.ReadFloat("rotationY") / 180.0f);
+        props.rotationZ = (vt_utils::UTILS_PI * image_script.ReadFloat("rotation") / 180.0f);
         props.xTranslation = image_script.ReadFloat("x");
         props.yTranslation = image_script.ReadFloat("y");
 

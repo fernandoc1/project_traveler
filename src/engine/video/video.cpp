@@ -793,8 +793,14 @@ void VideoEngine::DrawSprite(gl::ShaderProgram* shader_program,
 
     shader_program->UpdateUniform("u_Color", color.GetColors(), 4);
 
-    float angle[1] = {properties.rotation};
-    shader_program->UpdateUniform("u_Angle", angle, 1);
+    float angleX[1] = {properties.rotationX};
+    shader_program->UpdateUniform("u_AngleX", angleX, 1);
+
+    float angleY[1] = {properties.rotationY};
+    shader_program->UpdateUniform("u_AngleY", angleY, 1);
+
+    float angleZ[1] = {properties.rotationZ};
+    shader_program->UpdateUniform("u_AngleZ", angleZ, 1);
 
     float tx[1] = {properties.xTranslation};
     shader_program->UpdateUniform("u_tx", tx, 1);
