@@ -1397,7 +1397,7 @@ void AnimatedImage::Update(uint32_t elapsed_time)
     }
 }
 
-bool AnimatedImage::AddFrame(const std::string &frame, uint32_t frame_time)
+bool AnimatedImage::AddFrame(const std::string &frame, uint32_t frame_time, ImageDescriptorProperties frame_properties)
 {
     StillImage img;
     img.SetStatic(_is_static);
@@ -1409,13 +1409,14 @@ bool AnimatedImage::AddFrame(const std::string &frame, uint32_t frame_time)
     AnimationFrame new_frame;
     new_frame.frame_time = frame_time;
     new_frame.image = img;
-
+    new_frame.properties = frame_properties;
+    
     _frames.push_back(new_frame);
     _animation_time += frame_time;
     return true;
 }
 
-bool AnimatedImage::AddFrame(const StillImage &frame, uint32_t frame_time)
+bool AnimatedImage::AddFrame(const StillImage &frame, uint32_t frame_time, ImageDescriptorProperties frame_properties)
 {
     if(!frame._image_texture) {
         PRINT_WARNING << "The StillImage argument did not contain any image elements" << std::endl;
@@ -1425,6 +1426,7 @@ bool AnimatedImage::AddFrame(const StillImage &frame, uint32_t frame_time)
     AnimationFrame new_frame;
     new_frame.image = frame;
     new_frame.frame_time = frame_time;
+    new_frame.properties = frame_properties;
 
     _frames.push_back(new_frame);
     _animation_time += frame_time;

@@ -34,9 +34,9 @@ sprite_animation = {
             [2] = { id = 8, duration = 130 },
         },
         [ANIM_EAST] = {
-            [0] = { id = 6, duration = 130 },
-            [1] = { id = 7, duration = 130 },
-            [2] = { id = 8, duration = 130 },
+            [0] = { id = 6, duration = 130, rotationX = 180 },
+            [1] = { id = 7, duration = 130, rotationX = 180 },
+            [2] = { id = 8, duration = 130, rotationX = 180 },
         }
     }
 }

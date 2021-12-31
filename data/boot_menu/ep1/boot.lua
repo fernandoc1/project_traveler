@@ -36,10 +36,10 @@ function Initialize(boot_instance)
     GlobalManager:GetCharacterHandler():AddCharacter(SETZER);
     GlobalManager:GetCharacterHandler():AddCharacter(GOLBEZ);
 
-    ModeManager:Push(battle, false, false)
-
     local map_mode = vt_map.MapMode("data/story/ep1/layna_forest/layna_forest_crystal_map.lua", "data/debug/subscripts/sprite_test.lua");
-    ModeManager:Push(map_mode, true, true);
+
+    --ModeManager:Push(map_mode, true, true);
+    ModeManager:Push(battle, false, false)
 end
 
 function OldInitialize(boot_instance)

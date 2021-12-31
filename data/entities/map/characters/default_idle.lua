@@ -20,7 +20,7 @@ sprite_animation = {
 	-- The frames duration in milliseconds
     frames = {
         [ANIM_SOUTH] = {
-            [0] = { id = 1, duration = 150 }
+            [0] = { id = 1, duration = 150, rotation = 90 }
         },
         [ANIM_NORTH] = {
             [0] = { id = 4, duration = 150 }
@@ -29,7 +29,7 @@ sprite_animation = {
             [0] = { id = 7, duration = 150 }
         },
         [ANIM_EAST] = {
-            [0] = { id = 7, duration = 150 }
+            [0] = { id = 7, duration = 150, rotationY = 180 }
         }
     }
 }

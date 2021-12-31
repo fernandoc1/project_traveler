@@ -143,6 +143,7 @@ bool _LoadAnimations(std::vector<vt_video::AnimatedImage>& animations, const std
         // Loads the frames data
         std::vector<uint32_t> frames_ids;
         std::vector<uint32_t> frames_duration;
+        std::vector<vt_video::ImageDescriptorProperties> frames_properties;
 
         uint32_t num_frames = animations_script.GetTableSize();
         for(uint32_t frames_table_id = 0;  frames_table_id < num_frames; ++frames_table_id) {
@@ -151,6 +152,11 @@ bool _LoadAnimations(std::vector<vt_video::AnimatedImage>& animations, const std
 
             int32_t frame_id = animations_script.ReadInt("id");
             int32_t frame_duration = animations_script.ReadInt("duration");
+            
+            vt_video::ImageDescriptorProperties props;
+            props.rotationX = (vt_utils::UTILS_PI * animations_script.ReadFloat("rotationX") / 180.0f);
+            props.rotationY = (vt_utils::UTILS_PI * animations_script.ReadFloat("rotationY") / 180.0f);
+            props.rotationZ = (vt_utils::UTILS_PI * animations_script.ReadFloat("rotation") / 180.0f);
 
             if(frame_id < 0 || frame_duration < 0 || frame_id >= (int32_t)image_frames.size()) {
                 PRINT_WARNING << "Invalid frame (" << frames_table_id << ") in file: "
@@ -162,6 +168,7 @@ bool _LoadAnimations(std::vector<vt_video::AnimatedImage>& animations, const std
 
             frames_ids.push_back((uint32_t)frame_id);
             frames_duration.push_back((uint32_t)frame_duration);
+            frames_properties.push_back(props);
 
             animations_script.CloseTable(); // frames[ANIM_DIRECTION][frame_table_id] table
         }
