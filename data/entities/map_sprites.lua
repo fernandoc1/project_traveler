@@ -7,6 +7,21 @@ local VERY_FAST_SPEED = vt_map.MapMode.VERY_FAST_SPEED;
 
 local ENEMY_SPEED = vt_map.MapMode.ENEMY_SPEED;
 
+sprites["Borghen"] = {
+    name = vt_system.Translate("Bronann"),
+    coll_half_width = 0.95 * 16,
+    coll_height = 1.0 * 16,
+    img_half_width = 1.0 * 16,
+    img_height = 4.0 * 16,
+    movement_speed = NORMAL_SPEED,
+    face_portrait = "data/entities/portraits/bronann.png",
+
+    standard_animations = {
+        idle = "data/entities/map/characters/default_idle.lua",
+        walk = "data/entities/map/characters/default_walk.lua"
+    }
+}
+
 sprites["Bronann"] = {
     name = vt_system.Translate("Bronann"),
     coll_half_width = 0.95 * 16,
