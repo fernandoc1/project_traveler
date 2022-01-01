@@ -151,10 +151,6 @@ public:
         return _height;
     }
 
-    virtual DrawProperties GetProperties() const {
-        return _properties;
-    }
-
     //! \brief Empty update function permitting better abstraction between StillImage and AnimatedImage.
     virtual void Update()
     {}
@@ -167,10 +163,6 @@ public:
     //! \brief Returns true if the image is grayscale.
     bool IsGrayscale() const {
         return _grayscale;
-    }
-
-    void SetProperties(DrawProperties properties) {
-        _properties = properties;
     }
 
     //! \brief Sets whether the image should be grayscaled.
@@ -324,8 +316,6 @@ protected:
 
     //! \brief Whether the image should be smoothed.
     bool _smooth;
-
-    DrawProperties _properties;
 
     /** \brief Removes a reference to _texture, and frees or deletes it if it has no remaining references
     ***

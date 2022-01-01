@@ -70,8 +70,7 @@ ImageDescriptor::ImageDescriptor() :
     _unichrome_vertices(true),
     _is_static(false),
     _grayscale(false),
-    _smooth(true),
-    _properties()
+    _smooth(true)
 {
     _color[0] = _color[1] = _color[2] = _color[3] = Color::white;
 }
@@ -107,8 +106,7 @@ ImageDescriptor::ImageDescriptor(const ImageDescriptor &copy) :
     _unichrome_vertices(copy._unichrome_vertices),
     _is_static(copy._is_static),
     _grayscale(copy._grayscale),
-    _smooth(copy._smooth),
-    _properties(copy._properties)
+    _smooth(copy._smooth)
 {
     _color[0] = copy._color[0];
     _color[1] = copy._color[1];
@@ -143,7 +141,6 @@ ImageDescriptor &ImageDescriptor::operator=(const ImageDescriptor &copy)
     _color[1] = copy._color[1];
     _color[2] = copy._color[2];
     _color[3] = copy._color[3];
-    _properties = copy._properties;
 
 
     // Update the reference to the previous image texturee
@@ -185,7 +182,6 @@ void ImageDescriptor::Clear()
     _is_static = false;
     _grayscale = false;
     _smooth = true;
-    _properties = DrawProperties();
 }
 
 
@@ -552,13 +548,12 @@ void ImageDescriptor::_DrawTexture(const Color* draw_color) const {
     _DrawTexture(&properties);
 }
 
-void ImageDescriptor::_DrawTexture(const DrawProperties* draw_properties) const
-{
-    DrawProperties localProperties = _properties;
+void ImageDescriptor::_DrawTexture(const DrawProperties* draw_properties) const {
+    DrawProperties localProperties;
     Color const* draw_color = nullptr;
     if(draw_properties != nullptr) {
         draw_color = draw_properties->drawColor;
-        //localProperties = *draw_properties;
+        localProperties = *draw_properties;
     }
 
     // The vertex positions.
@@ -846,7 +841,6 @@ void StillImage::Clear()
     _image_texture = nullptr;
     _offset.x = 0.0f;
     _offset.y = 0.0f;
-    _properties = DrawProperties();
 }
 
 bool StillImage::Load(const std::string &filename)
@@ -859,7 +853,6 @@ bool StillImage::Load(const std::string &filename)
         _height = 0.0f;
         _offset.x = 0.0f;
         _offset.y = 0.0f;
-        _properties = DrawProperties();
     }
 
     _filename = filename;
@@ -1235,14 +1228,13 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
     ResetAnimation();
     // First copy the image data raw
     for(uint32_t i = 0; i < frames_ids.size(); ++i)
-        AddFrame(image_frames[frames_ids[i]], frames_duration[i]);
+        AddFrame(image_frames[frames_ids[i]], frames_duration[i], frames_properties[i]);
 
     // Once copied and only at that time, setup the data offsets to avoid the case
     // where the offsets might be applied several times on the same origin image,
     // breaking the offset resizing when the dimensions are different from the original image.
     for (uint32_t i = 0; i < _frames.size(); ++i) {
         _frames[i].image.SetDrawOffsets(frames_offsets[i].first, frames_offsets[i].second);
-        _frames[i].image.SetProperties(frames_properties[i]);
     }
 
     // Then only, set the dimensions
