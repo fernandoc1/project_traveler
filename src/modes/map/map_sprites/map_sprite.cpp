@@ -143,7 +143,7 @@ bool _LoadAnimations(std::vector<vt_video::AnimatedImage>& animations, const std
         // Loads the frames data
         std::vector<uint32_t> frames_ids;
         std::vector<uint32_t> frames_duration;
-        std::vector<vt_video::ImageDescriptorProperties> frames_properties;
+        std::vector<vt_video::DrawProperties> frames_properties;
 
         uint32_t num_frames = animations_script.GetTableSize();
         for(uint32_t frames_table_id = 0;  frames_table_id < num_frames; ++frames_table_id) {
@@ -153,7 +153,7 @@ bool _LoadAnimations(std::vector<vt_video::AnimatedImage>& animations, const std
             int32_t frame_id = animations_script.ReadInt("id");
             int32_t frame_duration = animations_script.ReadInt("duration");
             
-            vt_video::ImageDescriptorProperties props;
+            vt_video::DrawProperties props;
             props.rotationX = (vt_utils::UTILS_PI * animations_script.ReadFloat("rotationX") / 180.0f);
             props.rotationY = (vt_utils::UTILS_PI * animations_script.ReadFloat("rotationY") / 180.0f);
             props.rotationZ = (vt_utils::UTILS_PI * animations_script.ReadFloat("rotation") / 180.0f);
@@ -179,7 +179,7 @@ bool _LoadAnimations(std::vector<vt_video::AnimatedImage>& animations, const std
         animations[anim_direction].SetAnimationBlended(blended_animation);
         for(uint32_t j = 0; j < frames_ids.size(); ++j) {
             // Set the dimension of the requested frame
-            animations[anim_direction].AddFrame(image_frames[frames_ids[j]], frames_duration[j]);
+            animations[anim_direction].AddFrame(image_frames[frames_ids[j]], frames_duration[j], frames_properties[j]);
         }
 
         // Closes frames[ANIM_DIRECTION]

@@ -64,20 +64,22 @@ class ParticleSystem;
 namespace vt_video
 {
 
-struct ImageDescriptorProperties {
+struct DrawProperties {
     float rotationX;
     float rotationY;
     float rotationZ;
     float xTranslation;
     float yTranslation;
+    Color const* drawColor;
 
-    ImageDescriptorProperties() 
-        : rotationX(0.0f)
-        , rotationY(0.0f)
-        , rotationZ(0.0f)
-        , xTranslation(0.0f)
-        , yTranslation(0.0f)
-    {}
+    DrawProperties();
+    DrawProperties(const Color& color);
+    
+    DrawProperties(const DrawProperties&) = default;
+    DrawProperties(DrawProperties&&) = default;
+
+    DrawProperties& operator=(const DrawProperties&) = default;
+    DrawProperties& operator=(DrawProperties&&) = default;
 };
 
 class StillImage;
@@ -142,7 +144,7 @@ public:
         return _height;
     }
 
-    virtual ImageDescriptorProperties GetProperties() const {
+    virtual DrawProperties GetProperties() const {
         return _properties;
     }
 
@@ -160,7 +162,7 @@ public:
         return _grayscale;
     }
 
-    void SetProperties(ImageDescriptorProperties properties) {
+    void SetProperties(DrawProperties properties) {
         _properties = properties;
     }
 
@@ -316,7 +318,7 @@ protected:
     //! \brief Whether the image should be smoothed.
     bool _smooth;
 
-    ImageDescriptorProperties _properties;
+    DrawProperties _properties;
 
     /** \brief Removes a reference to _texture, and frees or deletes it if it has no remaining references
     ***
@@ -535,6 +537,8 @@ namespace private_video
 class AnimationFrame
 {
 public:
+    vt_video::DrawProperties frame_properties;
+
     //! \brief The amount of time to display this frame, in milliseconds
     uint32_t frame_time;
 
@@ -689,7 +693,7 @@ public:
     *** you always will want. For example, if your coordinate system is in terms of 32x32 pixel
     *** tiles, then a tile image would have a width and height of 1, not 32.
     **/
-    bool AddFrame(const std::string &frame, uint32_t frame_time, ImageDescriptorProperties frame_properties = ImageDescriptorProperties());
+    bool AddFrame(const std::string &frame, uint32_t frame_time, DrawProperties frame_properties = DrawProperties());
 
     /** \brief Adds an animation frame by using an existing static image.
     *** \param frame The still image to use as the frame image.
@@ -699,7 +703,7 @@ public:
     *** The frame argument should have at least one element prepared. Passing a StillImage
     *** that does not contain any image data will result in failure for this call.
     **/
-    bool AddFrame(const StillImage &frame, uint32_t frame_time, ImageDescriptorProperties frame_properties = ImageDescriptorProperties());
+    bool AddFrame(const StillImage &frame, uint32_t frame_time, DrawProperties frame_properties = DrawProperties());
 
     //! \name Class Member Access Functions
     //@{

@@ -660,11 +660,6 @@ function CreateSprite(Map, name, x, y, layer)
         return nil;
     end
 
-    if (Map == nil) then
-        print("Error: Function called with invalid Map object");
-        return nil;
-    end
-
     -- Note: Auto-registered to the object supervisor.
     local sprite = vt_map.MapSprite.Create(layer);
     sprite:SetName(sprites[name].name);

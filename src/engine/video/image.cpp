@@ -36,6 +36,24 @@ using namespace vt_common;
 namespace vt_video
 {
 
+DrawProperties::DrawProperties()
+        : rotationX(0.0f)
+        , rotationY(0.0f)
+        , rotationZ(0.0f)
+        , xTranslation(0.0f)
+        , yTranslation(0.0f)
+        , drawColor(&vt_video::Color::white)
+    {}
+
+DrawProperties::DrawProperties(const Color& color)
+        : rotationX(0.0f)
+        , rotationY(0.0f)
+        , rotationZ(0.0f)
+        , xTranslation(0.0f)
+        , yTranslation(0.0f)
+        , drawColor(&color)
+    {}
+
 // -----------------------------------------------------------------------------
 // ImageDescriptor class
 // -----------------------------------------------------------------------------
@@ -167,7 +185,7 @@ void ImageDescriptor::Clear()
     _is_static = false;
     _grayscale = false;
     _smooth = true;
-    _properties = ImageDescriptorProperties();
+    _properties = DrawProperties();
 }
 
 
@@ -815,7 +833,7 @@ void StillImage::Clear()
     _image_texture = nullptr;
     _offset.x = 0.0f;
     _offset.y = 0.0f;
-    _properties = ImageDescriptorProperties();
+    _properties = DrawProperties();
 }
 
 bool StillImage::Load(const std::string &filename)
@@ -828,7 +846,7 @@ bool StillImage::Load(const std::string &filename)
         _height = 0.0f;
         _offset.x = 0.0f;
         _offset.y = 0.0f;
-        _properties = ImageDescriptorProperties();
+        _properties = DrawProperties();
     }
 
     _filename = filename;
@@ -1146,7 +1164,7 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
     std::vector<uint32_t> frames_ids;
     std::vector<uint32_t> frames_duration;
     std::vector<std::pair<float, float> > frames_offsets;
-    std::vector<ImageDescriptorProperties> frames_properties;
+    std::vector<DrawProperties> frames_properties;
 
     image_script.OpenTable("frames");
     uint32_t num_frames = image_script.GetTableSize();
@@ -1155,7 +1173,7 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
 
         int32_t frame_id = image_script.ReadInt("id");
         int32_t frame_duration = image_script.ReadInt("duration");
-        ImageDescriptorProperties props;
+        DrawProperties props;
         props.rotationX = (vt_utils::UTILS_PI * image_script.ReadFloat("rotationX") / 180.0f);
         props.rotationY = (vt_utils::UTILS_PI * image_script.ReadFloat("rotationY") / 180.0f);
         props.rotationZ = (vt_utils::UTILS_PI * image_script.ReadFloat("rotation") / 180.0f);
@@ -1397,7 +1415,7 @@ void AnimatedImage::Update(uint32_t elapsed_time)
     }
 }
 
-bool AnimatedImage::AddFrame(const std::string &frame, uint32_t frame_time, ImageDescriptorProperties frame_properties)
+bool AnimatedImage::AddFrame(const std::string &frame, uint32_t frame_time, DrawProperties frame_properties)
 {
     StillImage img;
     img.SetStatic(_is_static);
@@ -1409,14 +1427,14 @@ bool AnimatedImage::AddFrame(const std::string &frame, uint32_t frame_time, Imag
     AnimationFrame new_frame;
     new_frame.frame_time = frame_time;
     new_frame.image = img;
-    new_frame.image.SetProperties(frame_properties);
+    new_frame.frame_properties = frame_properties;
 
     _frames.push_back(new_frame);
     _animation_time += frame_time;
     return true;
 }
 
-bool AnimatedImage::AddFrame(const StillImage &frame, uint32_t frame_time, ImageDescriptorProperties frame_properties)
+bool AnimatedImage::AddFrame(const StillImage &frame, uint32_t frame_time, DrawProperties frame_properties)
 {
     if(!frame._image_texture) {
         PRINT_WARNING << "The StillImage argument did not contain any image elements" << std::endl;
@@ -1426,7 +1444,7 @@ bool AnimatedImage::AddFrame(const StillImage &frame, uint32_t frame_time, Image
     AnimationFrame new_frame;
     new_frame.image = frame;
     new_frame.frame_time = frame_time;
-    new_frame.image.SetProperties(frame_properties);
+    new_frame.frame_properties = frame_properties;
 
     _frames.push_back(new_frame);
     _animation_time += frame_time;

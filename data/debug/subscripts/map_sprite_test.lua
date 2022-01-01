@@ -35,7 +35,7 @@ function Load(m)
     Map:SetRunningEnabled(false) -- Hide the stamina bar
 
     -- Adds a sprite
-    bronann = CreateSprite(Map, "Borghen", 32, 43, vt_map.MapMode.GROUND_OBJECT);
+    bronann = CreateSprite(nil, "Borghen", 32, 43, vt_map.MapMode.GROUND_OBJECT);
     bronann:SetDirection(vt_map.MapMode.SOUTH);
     bronann:SetMovementSpeed(vt_map.MapMode.NORMAL_SPEED);
 

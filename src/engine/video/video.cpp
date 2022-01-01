@@ -771,7 +771,7 @@ void VideoEngine::DrawSprite(gl::ShaderProgram* shader_program,
                              float* vertex_texture_coordinates,
                              float* vertex_colors,
                              const Color& color,
-                             ImageDescriptorProperties properties)
+                             DrawProperties properties)
 {
     assert(_sprite != nullptr);
     assert(shader_program != nullptr);
