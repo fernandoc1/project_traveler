@@ -298,7 +298,7 @@ void BindEngineCode()
 
             luabind::class_<StillImage, ImageDescriptor>("StillImage")
             .def("Clear", &StillImage::Clear)
-            .def("Draw", (void(StillImage::*)(const vt_video::Color&)) &StillImage::Draw)
+            .def("Draw", static_cast<void(vt_video::StillImage::*)(const vt_video::Color&) const>(&StillImage::Draw))
             .def("SetWidth", &StillImage::SetWidth)
             .def("SetHeight", &StillImage::SetHeight)
             .def("SetWidthKeepRatio", &StillImage::SetWidthKeepRatio)

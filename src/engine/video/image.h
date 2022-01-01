@@ -130,6 +130,13 @@ public:
     /** \brief Draws a color modulated version of the image to the display buffer
     *** \param draw_color The color to modulate the image by
     **/
+    virtual void Draw(const DrawProperties& properties) const {
+        Draw(*properties.drawColor);
+    };
+
+    /** \brief Draws a color modulated version of the image to the display buffer
+    *** \param draw_color The color to modulate the image by
+    **/
     virtual void Draw(const Color& draw_color = vt_video::Color::white) const = 0;
 
     //! \name Class Member Access Functions
@@ -406,6 +413,8 @@ public:
         SetDimensions(width, height);
         return Load(filename);
     }
+
+    void Draw(const DrawProperties& properties) const override;
 
     /** \brief Draws a color-modulated version of the image
     *** \param draw_color The color to modulate the image by

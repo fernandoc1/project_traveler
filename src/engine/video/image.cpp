@@ -933,8 +933,14 @@ bool StillImage::Load(const std::string &filename)
     return true;
 }
 
-void StillImage::Draw(const Color &draw_color) const
+void StillImage::Draw(const Color& draw_color) const {
+    DrawProperties properties(draw_color);
+    Draw(properties);
+}
+
+void StillImage::Draw(const DrawProperties& properties) const
 {
+    const Color& draw_color = *properties.drawColor;
     // Don't draw anything if this image is completely transparent (invisible).
     if (IsFloatEqual(draw_color[3], 0.0f))
         return;
