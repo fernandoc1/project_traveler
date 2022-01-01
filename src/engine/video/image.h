@@ -354,7 +354,9 @@ protected:
     *** more than a pointer to the _color member of this very class, but in certain cases like during
     *** a screen fade these colors may differ.
     **/
-    void _DrawTexture(const Color *draw_color) const;
+    void _DrawTexture(const Color* draw_color) const;
+
+    void _DrawTexture(const DrawProperties* draw_properties) const;
 
     virtual void _EnableGrayscale() = 0;
 

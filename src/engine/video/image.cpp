@@ -546,8 +546,21 @@ void ImageDescriptor::_DrawOrientation() const
     VideoManager->Scale(scale.x, scale.y);
 }
 
-void ImageDescriptor::_DrawTexture(const Color* draw_color) const
+void ImageDescriptor::_DrawTexture(const Color* draw_color) const {
+    DrawProperties properties;
+    properties.drawColor = draw_color;
+    _DrawTexture(&properties);
+}
+
+void ImageDescriptor::_DrawTexture(const DrawProperties* draw_properties) const
 {
+    DrawProperties localProperties = _properties;
+    Color const* draw_color = nullptr;
+    if(draw_properties != nullptr) {
+        draw_color = draw_properties->drawColor;
+        //localProperties = *draw_properties;
+    }
+
     // The vertex positions.
     float vertex_positions[] =
     {
@@ -662,7 +675,7 @@ void ImageDescriptor::_DrawTexture(const Color* draw_color) const
 
     if (_unichrome_vertices) {
         // Draw the image.
-        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, *draw_color, _properties);
+        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, *draw_color, localProperties);
     } else {
         // For each of the four vertices.
         for (unsigned i = 0; i < 4; ++i)
@@ -685,7 +698,7 @@ void ImageDescriptor::_DrawTexture(const Color* draw_color) const
         assert(shader_program != nullptr);
 
         // Draw the image.
-        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, ::vt_video::Color::white, _properties);
+        VideoManager->DrawSprite(shader_program, vertex_positions, vertex_texture_coordinates, vertex_colors, ::vt_video::Color::white, localProperties);
     }
 
     // Unload the shader program.
@@ -953,8 +966,10 @@ void StillImage::Draw(const DrawProperties& properties) const
     _DrawOrientation();
 
     // Used to determine if the image color should be modulated by any degree due to screen fading effects.
+    DrawProperties localProperties = properties;
     if(draw_color == Color::white) {
-        _DrawTexture(_color);
+        localProperties.drawColor = _color;
+        _DrawTexture(&localProperties);
     }
     else {
         // The color of each vertex point.
@@ -963,8 +978,9 @@ void StillImage::Draw(const DrawProperties& properties) const
         modulated_colors[1] = _color[1] * draw_color;
         modulated_colors[2] = _color[2] * draw_color;
         modulated_colors[3] = _color[3] * draw_color;
-
-        _DrawTexture(modulated_colors);
+        
+        localProperties.drawColor = modulated_colors;
+        _DrawTexture(&localProperties);
     }
 
     VideoManager->PopMatrix();
@@ -1323,9 +1339,12 @@ void AnimatedImage::Draw(const Color& draw_color) const
         return;
     }
 
+    DrawProperties properties;
     if (!_blended_animation || _frames[_frame_index].frame_time <= 4
             || _frame_counter > _frames[_frame_index].frame_time / 4) {
-        _frames[_frame_index].image.Draw(draw_color);
+        properties = _frames[_frame_index].frame_properties;
+        properties.drawColor = &draw_color;
+        _frames[_frame_index].image.Draw(properties);
         return;
     }
 
@@ -1338,10 +1357,12 @@ void AnimatedImage::Draw(const Color& draw_color) const
     float previous_frame_alpha = 1.0f - current_frame_alpha;
 
     blended_color.SetAlpha(previous_frame_alpha);
-    _frames[previous_frame_index].image.Draw(blended_color);
+    properties = _frames[previous_frame_index].frame_properties;
+    properties.drawColor = &blended_color;
+    _frames[previous_frame_index].image.Draw(properties);
 
     blended_color.SetAlpha(current_frame_alpha);
-    _frames[_frame_index].image.Draw(blended_color);
+    _frames[_frame_index].image.Draw(properties);
 }
 
 bool AnimatedImage::Save(const std::string& filename,
