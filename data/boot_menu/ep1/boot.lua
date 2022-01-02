@@ -30,6 +30,7 @@ function Initialize(boot_instance)
     local battle = vt_battle.BattleMode()
     battle:AddEnemy(4, 0, 0)
     --battle:AddEnemy(4, 0, 0)
+    GlobalManager:GetBattleMedia():SetBackgroundImage("data/battles/battle_scenes/mountain_background.png");
 
     GlobalManager:GetCharacterHandler():AddCharacter(BORGHEN);
     GlobalManager:GetCharacterHandler():AddCharacter(AERITH);
@@ -40,7 +41,7 @@ function Initialize(boot_instance)
     --local map_mode = vt_map.MapMode("data/story/ep1/layna_forest/layna_forest_crystal_map.lua", "data/debug/subscripts/sprite_test.lua");
     --local map_mode = vt_map.MapMode("data/debug/test_map.lua", "data/debug/subscripts/map_sprite_test.lua");
 
-    --ModeManager:Push(battle, false, false)
+    ModeManager:Push(battle, false, false)
     ModeManager:Push(map_mode, true, true);
 end
 
