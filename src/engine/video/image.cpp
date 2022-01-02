@@ -42,6 +42,8 @@ DrawProperties::DrawProperties()
         , rotationZ(0.0f)
         , xTranslation(0.0f)
         , yTranslation(0.0f)
+        , flipX(false)
+        , flipY(false)
         , drawColor(&vt_video::Color::white)
     {}
 
@@ -51,6 +53,8 @@ DrawProperties::DrawProperties(const Color& color)
         , rotationZ(0.0f)
         , xTranslation(0.0f)
         , yTranslation(0.0f)
+        , flipX(false)
+        , flipY(false)
         , drawColor(&color)
     {}
 
@@ -616,14 +620,14 @@ void ImageDescriptor::_DrawTexture(const DrawProperties* draw_properties) const 
         float t1 = _texture->v1 + (_v2 * (_texture->v2 - _texture->v1));
 
         // Swap x texture coordinates if x flipping is enabled.
-        if (VideoManager->_current_context.x_flip) {
+        if (localProperties.flipX || VideoManager->_current_context.x_flip) {
             float temp = s0;
             s0 = s1;
             s1 = temp;
         }
 
         // Swap y texture coordinates if y flipping is enabled.
-        if (VideoManager->_current_context.y_flip) {
+        if (localProperties.flipY || VideoManager->_current_context.y_flip) {
             float temp = t0;
             t0 = t1;
             t1 = temp;
@@ -1192,6 +1196,8 @@ bool AnimatedImage::LoadFromAnimationScript(const std::string &filename, const s
         props.rotationX = (vt_utils::UTILS_PI * image_script.ReadFloat("rotationX") / 180.0f);
         props.rotationY = (vt_utils::UTILS_PI * image_script.ReadFloat("rotationY") / 180.0f);
         props.rotationZ = (vt_utils::UTILS_PI * image_script.ReadFloat("rotation") / 180.0f);
+        props.flipX = image_script.ReadBool("flipX");
+        props.flipY = image_script.ReadBool("flipY");
         props.xTranslation = image_script.ReadFloat("x");
         props.yTranslation = image_script.ReadFloat("y");
 

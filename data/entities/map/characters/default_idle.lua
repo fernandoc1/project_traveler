@@ -29,7 +29,7 @@ sprite_animation = {
             [0] = { id = 7, duration = 150 }
         },
         [ANIM_EAST] = {
-            [0] = { id = 7, duration = 150, rotationY = 180 }
+            [0] = { id = 7, duration = 150, flipX = true }
         }
     }
 }

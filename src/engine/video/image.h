@@ -70,6 +70,8 @@ struct DrawProperties {
     float rotationZ;
     float xTranslation;
     float yTranslation;
+    bool flipX;
+    bool flipY;
     Color const* drawColor;
 
     DrawProperties();

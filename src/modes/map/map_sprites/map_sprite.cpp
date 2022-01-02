@@ -157,6 +157,8 @@ bool _LoadAnimations(std::vector<vt_video::AnimatedImage>& animations, const std
             props.rotationX = (vt_utils::UTILS_PI * animations_script.ReadFloat("rotationX") / 180.0f);
             props.rotationY = (vt_utils::UTILS_PI * animations_script.ReadFloat("rotationY") / 180.0f);
             props.rotationZ = (vt_utils::UTILS_PI * animations_script.ReadFloat("rotation") / 180.0f);
+            props.flipX = animations_script.ReadBool("flipX");
+            props.flipY = animations_script.ReadBool("flipY");
 
             if(frame_id < 0 || frame_duration < 0 || frame_id >= (int32_t)image_frames.size()) {
                 PRINT_WARNING << "Invalid frame (" << frames_table_id << ") in file: "
