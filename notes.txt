@@ -7,3 +7,8 @@ LC_COLLATE=C sort -u /tmp/output.txt
 To show ports in emcc:
 emcc --show-ports
 
+To compile lua with webassembly:
+make CC='emcc' AR='emar rcu' RANLIB='emranlib'
+Reference: https://medium.com/@imwithye/port-lua-to-web-environment-using-webassembly-3144a8ac000e
+
+
