@@ -1,0 +1,9 @@
+To list all cmake definitions:
+cmake -LAH .. > /tmp/output.txt
+
+To list all:
+LC_COLLATE=C sort -u /tmp/output.txt
+
+To show ports in emcc:
+emcc --show-ports
+
