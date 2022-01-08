@@ -3,16 +3,37 @@ CMAKE_POLICY(VERSION 2.6)
 
 IF (DEFINED ENV{EMSDK})
     MESSAGE(">>> EMSDK=$ENV{EMSDK}")
-    SET(CMAKE_C_COMPILER "emcc")
-    SET(CMAKE_CXX_COMPILER "emcc")
-    SET(USE_FLAGS "-s USE_SDL=2 -s USE_FREETYPE=1 -s USE_SDL_TTF=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[\"png\"]' -s WASM=1 -s USE_SDL_MIXER=2 -s USE_OGG=1 -s USE_VORBIS=1")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${USE_FLAGS}")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${USE_FLAGS}")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${USE_FLAGS}")
-    set(CMAKE_EXECUTABLE_SUFFIX .html)
-
-    SET(CMAKE_MODULE_PATH "$ENV{EMSDK}/upstream/emscripten/cmake/Modules/")
+    SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/webassembly_cmake_modules/" "$ENV{EMSDK}/upstream/emscripten/cmake/Modules/")
     message(">>> CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
+    
+    set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/webassembly_cmake_modules/WebassemblyToolchain.cmake")
+
+    #SET(CMAKE_C_COMPILER "emcc")
+    #SET(CMAKE_CXX_COMPILER "emcc")
+    #SET(USE_FLAGS "\
+    #-s SDL2_IMAGE_FORMATS='[\"png\"]' \
+    #-s USE_BOOST_HEADERS=1 \
+    #-s USE_FREETYPE=1 \
+    #-s USE_OGG=1 \
+    #-s USE_LIBPNG=1 \
+    #-s USE_OGG=1 \
+    #-s USE_SDL=2 \
+    #-s USE_SDL_IMAGE=2 \
+    #-s USE_SDL_MIXER=2 \
+    #-s USE_SDL_TTF=2 \
+    #-s USE_VORBIS=1 \
+    #-s WASM=1 \
+    #")
+    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${USE_FLAGS}")
+    #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${USE_FLAGS}")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${USE_FLAGS}")
+    #set(CMAKE_EXECUTABLE_SUFFIX .html)
+
+    #SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/webassembly_cmake_modules/" "$ENV{EMSDK}/upstream/emscripten/cmake/Modules/")
+    #message(">>> CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
+
+    #SET(SDL2_INCLUDE_DIR "${EMSDK}/upstream/emscripten/cache/sysroot/include/SDL2")
+    #SET(SDL2MAIN_LIBRARY "")
 ENDIF()
 
 PROJECT(VALYRIATEAR)
@@ -42,8 +63,10 @@ ELSE()
     SET(VER_BUILD 0)
 ENDIF()
 
-# where to look for cmake modules
-SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake/Modules)
+IF (NOT DEFINED ENV{EMSDK})
+    # where to look for cmake modules
+    SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake/Modules)
+ENDIF()
 
 SET(PKG_NAME "valyriatear")
 IF (WIN32)
