@@ -107,4 +107,4 @@ build/
 
 # VS Dependencies Directory
 ValyriaTear-VS2013-Dependencies
-src/luabind
+#src/luabind
