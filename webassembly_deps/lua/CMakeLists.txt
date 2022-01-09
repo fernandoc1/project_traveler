@@ -3,6 +3,8 @@ set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../../webassembly_cmake_mo
 project (lua_emscripten)
 cmake_minimum_required(VERSION 2.8)
 
+add_definitions(-DLUA_COMPAT_5_2)
+
 FILE(GLOB LUA_SRC ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
 
 add_library(lua ${LUA_SRC})

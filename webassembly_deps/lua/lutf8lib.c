@@ -224,11 +224,14 @@ static int byteoffset (lua_State *L) {
 static int iter_aux (lua_State *L, int strict) {
   size_t len;
   const char *s = luaL_checklstring(L, 1, &len);
-  lua_Unsigned n = (lua_Unsigned)lua_tointeger(L, 2);
-  if (n < len) {
-    while (iscont(s + n)) n++;  /* skip continuation bytes */
+  lua_Integer n = lua_tointeger(L, 2) - 1;
+  if (n < 0)  /* first iteration? */
+    n = 0;  /* start from here */
+  else if (n < (lua_Integer)len) {
+    n++;  /* skip current byte */
+    while (iscont(s + n)) n++;  /* and its continuations */
   }
-  if (n >= len)  /* (also handles original 'n' being negative) */
+  if (n >= (lua_Integer)len)
     return 0;  /* no more codepoints */
   else {
     utfint code;

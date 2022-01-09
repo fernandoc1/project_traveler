@@ -89,15 +89,14 @@ static void print_usage (const char *badoption) {
   lua_writestringerror(
   "usage: %s [options] [script [args]]\n"
   "Available options are:\n"
-  "  -e stat   execute string 'stat'\n"
-  "  -i        enter interactive mode after executing 'script'\n"
-  "  -l mod    require library 'mod' into global 'mod'\n"
-  "  -l g=mod  require library 'mod' into global 'g'\n"
-  "  -v        show version information\n"
-  "  -E        ignore environment variables\n"
-  "  -W        turn warnings on\n"
-  "  --        stop handling options\n"
-  "  -         stop handling options and execute stdin\n"
+  "  -e stat  execute string 'stat'\n"
+  "  -i       enter interactive mode after executing 'script'\n"
+  "  -l name  require library 'name' into global 'name'\n"
+  "  -v       show version information\n"
+  "  -E       ignore environment variables\n"
+  "  -W       turn warnings on\n"
+  "  --       stop handling options\n"
+  "  -        stop handling options and execute stdin\n"
   ,
   progname);
 }
@@ -208,22 +207,16 @@ static int dostring (lua_State *L, const char *s, const char *name) {
 
 
 /*
-** Receives 'globname[=modname]' and runs 'globname = require(modname)'.
+** Calls 'require(name)' and stores the result in a global variable
+** with the given name.
 */
-static int dolibrary (lua_State *L, char *globname) {
+static int dolibrary (lua_State *L, const char *name) {
   int status;
-  char *modname = strchr(globname, '=');
-  if (modname == NULL)  /* no explicit name? */
-    modname = globname;  /* module name is equal to global name */
-  else {
-    *modname = '\0';  /* global name ends here */
-    modname++;  /* module name starts after the '=' */
-  }
   lua_getglobal(L, "require");
-  lua_pushstring(L, modname);
-  status = docall(L, 1, 1);  /* call 'require(modname)' */
+  lua_pushstring(L, name);
+  status = docall(L, 1, 1);  /* call 'require(name)' */
   if (status == LUA_OK)
-    lua_setglobal(L, globname);  /* globname = require(modname) */
+    lua_setglobal(L, name);  /* global[name] = require return */
   return report(L, status);
 }
 
@@ -334,7 +327,7 @@ static int runargs (lua_State *L, char **argv, int n) {
     switch (option) {
       case 'e':  case 'l': {
         int status;
-        char *extra = argv[i] + 2;  /* both options need an argument */
+        const char *extra = argv[i] + 2;  /* both options need an argument */
         if (*extra == '\0') extra = argv[++i];
         lua_assert(extra != NULL);
         status = (option == 'e')
