@@ -26,7 +26,7 @@ SET(USE_FLAGS "\
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${USE_FLAGS}")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${USE_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${USE_FLAGS}")
-set(CMAKE_EXECUTABLE_SUFFIX .html)
+set(CMAKE_EXECUTABLE_SUFFIX ".js")
 
 # where is the target environment located
 set(CMAKE_FIND_ROOT_PATH $ENV{EMSDK}/upstream/emscripten/cache/sysroot/)

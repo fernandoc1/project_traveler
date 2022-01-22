@@ -8,13 +8,14 @@ IF (DEFINED ENV{EMSDK})
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/lua/)
     add_definitions(-DWEBASSEMBLY)
+    set(WEBASSEMBLY ON)
     MESSAGE(">>> EMSDK=$ENV{EMSDK}")
     SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/webassembly_cmake_modules/" "$ENV{EMSDK}/upstream/emscripten/cmake/Modules/")
     message(">>> CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
     
     set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/webassembly_cmake_modules/WebassemblyToolchain.cmake")
 
-    link_libraries(glut GLU GL lua)
+    link_libraries(GL-full_es3 glut GLU lua)
 
     #SET(CMAKE_C_COMPILER "emcc")
     #SET(CMAKE_CXX_COMPILER "emcc")

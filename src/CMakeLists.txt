@@ -439,7 +439,12 @@ ENDIF ()
 
 SET (PROGRAMS valyriatear)
 
-ADD_EXECUTABLE(valyriatear WIN32 ${SRCS} ${SRCS_COMMON} ${SRCS_LUABIND})
+if(DEFINED WEBASSEMBLY)
+    ADD_EXECUTABLE(valyriatear ${SRCS} ${SRCS_COMMON} ${SRCS_LUABIND})
+    set_target_properties(valyriatear PROPERTIES OUTPUT_NAME "valyriatear" SUFFIX ".html")
+else()
+    ADD_EXECUTABLE(valyriatear WIN32 ${SRCS} ${SRCS_COMMON} ${SRCS_LUABIND})
+endif()
 
 # Vorbis, vorbisfile and ogg are explcitely needed on OpenBSD
 IF (CMAKE_SYSTEM_NAME STREQUAL "OpenBSD")
