@@ -49,6 +49,10 @@
 #include <windows.h>
 #endif
 
+#ifdef WEBASSEMBLY
+#include <emscripten.h>
+#endif
+
 using namespace vt_utils;
 using namespace vt_common;
 using namespace vt_audio;
@@ -492,6 +496,57 @@ void UpdateEngine(uint32_t update_tick)
     //std::cout << "Update total delay: " << SDL_GetTicks() - update_begin_tick << "ms" << std::endl;
 }
 
+SDL_Window* sdl_window = NULL;
+
+int mainLoopFunction() {
+#ifdef WEBASSEMBLY
+    UpdateEngine(SDL_GetTicks());
+    RenderFrame();
+#else
+        // Used for a variable game speed,
+    // sleeping when on sufficiently fast hardware, and max FPS.
+    const uint32_t UPDATES_PER_SECOND = 60 + 10; // 10 is a smoothness safety margin (gives a max of 70 FPS)
+    const uint32_t SKIP_RENDER_TICKS = 1000 / UPDATES_PER_SECOND;
+    uint32_t render_tick = SDL_GetTicks();
+    uint32_t next_render_tick = 0;
+
+    try {
+        // This is the main loop for the game.
+        // The loop iterates once for every frame drawn to the screen.
+        while (SystemManager->NotDone()) {
+
+            // Render part
+            render_tick = SDL_GetTicks();
+
+            // We want to be nice with the CPU % used..
+            // And set fixed rendering updates
+            if (render_tick < next_render_tick) {
+                SDL_Delay(next_render_tick - render_tick);
+                continue;
+            }
+
+            UpdateEngine(render_tick);
+
+            RenderFrame();
+
+            // Swap the buffers once the draw operations are done.
+            SDL_GL_SwapWindow(sdl_window);
+
+            next_render_tick = SDL_GetTicks() + SKIP_RENDER_TICKS;
+
+        } // while (SystemManager->NotDone())
+    } catch(const Exception& e) {
+#ifdef WIN32
+        MessageBox(nullptr, e.ToString().c_str(), "Unhandled exception",
+                   MB_OK | MB_ICONERROR);
+#else
+        std::cerr << e.ToString() << std::endl;
+#endif
+        return EXIT_FAILURE;
+    }
+#endif
+}
+
 // Every great game begins with a single function :)
 // N.B.: The main signature must be:
 // int main(int argc, char *argv[]) to permit compilation
@@ -513,7 +568,7 @@ int main(int argc, char* argv[])
     }
 
     // Create a default window
-    SDL_Window* sdl_window = SDL_CreateWindow(APPFULLNAME,
+    sdl_window = SDL_CreateWindow(APPFULLNAME,
                          SDL_WINDOWPOS_CENTERED,
                          SDL_WINDOWPOS_CENTERED,
                          vt_video::VIDEO_VIEWPORT_WIDTH,
@@ -558,7 +613,7 @@ int main(int argc, char* argv[])
         // Now the program should be in app/Contents
         path.append("/Resources/");
         chdir(path.c_str());
-#elif (defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(SOLARIS)) && !defined(RELEASE_BUILD)
+#elif (defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(SOLARIS) || defined(WEBASSEMBLY)) && !defined(RELEASE_BUILD)
         // Look for data files in DATADIR only if they are not available in the current directory.
         if(!std::ifstream("data/config/settings.lua").good()) {
             if(chdir(PKG_DATADIR) != 0) {
@@ -605,48 +660,13 @@ int main(int argc, char* argv[])
 
     ModeManager->Push(new BootMode(), false, true);
 
-    // Used for a variable game speed,
-    // sleeping when on sufficiently fast hardware, and max FPS.
-    const uint32_t UPDATES_PER_SECOND = 60 + 10; // 10 is a smoothness safety margin (gives a max of 70 FPS)
-    const uint32_t SKIP_RENDER_TICKS = 1000 / UPDATES_PER_SECOND;
-    uint32_t render_tick = SDL_GetTicks();
-    uint32_t next_render_tick = 0;
-
-    try {
-        // This is the main loop for the game.
-        // The loop iterates once for every frame drawn to the screen.
-        while (SystemManager->NotDone()) {
-
-            // Render part
-            render_tick = SDL_GetTicks();
-
-            // We want to be nice with the CPU % used..
-            // And set fixed rendering updates
-            if (render_tick < next_render_tick) {
-                SDL_Delay(next_render_tick - render_tick);
-                continue;
-            }
-
-            UpdateEngine(render_tick);
-
-            RenderFrame();
-
-            // Swap the buffers once the draw operations are done.
-            SDL_GL_SwapWindow(sdl_window);
-
-            next_render_tick = SDL_GetTicks() + SKIP_RENDER_TICKS;
-
-        } // while (SystemManager->NotDone())
-    } catch(const Exception& e) {
-#ifdef WIN32
-        MessageBox(nullptr, e.ToString().c_str(), "Unhandled exception",
-                   MB_OK | MB_ICONERROR);
+#ifdef WEBASSEMBLY
+    emscripten_set_main_loop(mainLoopFunction, 0, 1);
 #else
-        std::cerr << e.ToString() << std::endl;
-#endif
+    if(mainLoopFunction() == EXIT_FAILURE) {
         return EXIT_FAILURE;
     }
-
+#endif
     DeinitializeEngine();
 
     // Once finished with OpenGL functions, the SDL_GLContext can be deleted.
