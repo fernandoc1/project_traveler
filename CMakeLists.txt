@@ -3,6 +3,8 @@ CMAKE_POLICY(VERSION 2.6)
 
 IF (DEFINED ENV{EMSDK})
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/lua)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/nul)
+
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/lua/)
     add_definitions(-DWEBASSEMBLY)
@@ -11,6 +13,8 @@ IF (DEFINED ENV{EMSDK})
     message(">>> CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
     
     set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/webassembly_cmake_modules/WebassemblyToolchain.cmake")
+
+    link_libraries(glut GLU GL lua)
 
     #SET(CMAKE_C_COMPILER "emcc")
     #SET(CMAKE_CXX_COMPILER "emcc")

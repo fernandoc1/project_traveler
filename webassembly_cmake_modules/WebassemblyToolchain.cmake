@@ -6,6 +6,9 @@ message(">>> EMSDK=$ENV{EMSDK}")
 # which compilers to use for C and C++
 SET(CMAKE_C_COMPILER "emcc")
 SET(CMAKE_CXX_COMPILER "emcc")
+SET(CMAKE_AR "emar")
+
+SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-s LLD_REPORT_UNDEFINED")
 
 SET(USE_FLAGS "\
 -s SDL2_IMAGE_FORMATS='[\"png\"]' \
@@ -39,3 +42,4 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 SET(SDL2_INCLUDE_DIR "${EMSDK}/upstream/emscripten/cache/sysroot/include/SDL2")
 SET(SDL2MAIN_LIBRARY "")
 
+link_directories("${EMSDK}/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/")
