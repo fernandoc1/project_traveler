@@ -121,6 +121,9 @@ static const std::string _SetupUserConfigPath()
         return path;
     }
 
+#elif defined WEBASSEMBLY
+    return "/";
+
 #else // Linux, BSD, other POSIX systems
     // Implementation of the freedesktop specs (at least partially)
     // http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
