@@ -661,10 +661,11 @@ int main(int argc, char* argv[])
 #endif
 
 #ifdef WEBASSEMBLY
+    std::cout << "<><><><> INFO: Starting main loop." << std::endl;
     emscripten_set_main_loop([] {
         UpdateEngine(SDL_GetTicks());
         RenderFrame();
-    }, 0, 1);
+    }, -1, 1);
 #endif
 
     DeinitializeEngine();

@@ -48,8 +48,8 @@ ENDIF()
 
 PROJECT(VALYRIATEAR)
 
-OPTION(DEBUG_FEATURES "Compile the game with the debug features" OFF)
-OPTION(DISABLE_TRANSLATIONS "Disable gettext / l10n support" OFF)
+OPTION(DEBUG_FEATURES "Compile the game with the debug features" ON)
+OPTION(DISABLE_TRANSLATIONS "Disable gettext / l10n support" ON)
 
 SET(CMAKE_BUILD_TYPE Debug)
 
