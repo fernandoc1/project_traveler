@@ -1,12 +1,13 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 CMAKE_POLICY(VERSION 2.6)
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/lua)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/lua/)
+
 IF (DEFINED ENV{EMSDK})
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/lua)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/nul)
 
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/)
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/lua/)
     add_definitions(-DWEBASSEMBLY)
     set(WEBASSEMBLY ON)
     MESSAGE(">>> EMSDK=$ENV{EMSDK}")
