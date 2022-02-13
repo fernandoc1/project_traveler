@@ -133,6 +133,7 @@ static bool LoadSettings()
         return false;
     }
 
+/*
     InputManager->SetJoysticksEnabled(!settings.ReadBool("input_disabled"));
     InputManager->SetJoyIndex(static_cast<int32_t>(settings.ReadInt("index")));
     InputManager->SetConfirmJoy(static_cast<uint8_t>(settings.ReadInt("confirm")));
@@ -142,6 +143,7 @@ static bool LoadSettings()
     InputManager->SetPauseJoy(static_cast<uint8_t>(settings.ReadInt("pause")));
     InputManager->SetQuitJoy(static_cast<uint8_t>(settings.ReadInt("quit")));
     InputManager->SetHelpJoy(static_cast<uint8_t>(settings.ReadInt("help")));
+*/
 
     if(settings.DoesIntExist("x_axis"))
         InputManager->SetXAxisJoy(static_cast<int8_t>(settings.ReadInt("x_axis")));

@@ -108,8 +108,11 @@ RenderTarget::RenderTarget(unsigned width,
     glBindRenderbuffer(GL_RENDERBUFFER, _renderbuffer_depth);
 
     // Initialize the depth renderbuffer.
+#ifndef WEBASSEMBLY
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT32, _width, _height);
-
+#else
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, _width, _height);
+#endif
     if (glGetError() != GL_NO_ERROR) {
         PRINT_ERROR << "Failed to initialize the depth renderbuffer." << std::endl;
         throw "Failed to initialize the depth renderbuffer.";
