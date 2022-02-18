@@ -11,33 +11,20 @@ namespace gl
 namespace shader_definitions
 {
 
-const std::string getDefaultVertex() {
-    std::ifstream file("data/shaders/default_vertex.vs");
+const std::string readFullTextFile(std::string path) {
+    std::ifstream file(path);
     std::stringstream ss;
     ss << file.rdbuf();
     return ss.str();
 }
 
-const char SOLID_FRAGMENT[] =
-        "#version 110\n"
-        "\n"
-        "//\n"
-        "// Uses the uniform and vertex colors value directly for a fragment's output.\n"
-        "//\n"
-        "\n"
-        "uniform vec4 u_Color;\n"
-        "\n"
-        "void main(void)\n"
-        "{\n"
-        "        gl_FragColor = gl_Color;\n"
-        "        gl_FragColor *= u_Color;\n"
-        "\n"
-        "        // Alpha Test\n"
-        "        if (gl_FragColor.a <= 0.0)\n"
-        "        {\n"
-        "            discard;\n"
-        "        }\n"
-        "}\n";
+const std::string getDefaultVertex() {
+    return readFullTextFile("data/shaders/default_vertex.vs");
+}
+
+const std::string getSolidFragment() { 
+    return readFullTextFile("data/shaders/solid_fragment.fs");
+}
 
     const char SOLID_GRAYSCALE_FRAGMENT[] =
         "#version 110\n"
@@ -130,7 +117,6 @@ const char SOLID_FRAGMENT[] =
         "}\n";
 
 
-const std::string getSolidFragment() { return std::string(SOLID_FRAGMENT); }
 const std::string getSolidGrayscaleFragment() { return std::string(SOLID_GRAYSCALE_FRAGMENT); }
 const std::string getSpriteFragment() { return std::string(SPRITE_FRAGMENT); }
 const std::string getSpriteGrayscaleFragment() { return std::string(SPRITE_GRAYSCALE_FRAGMENT); }
