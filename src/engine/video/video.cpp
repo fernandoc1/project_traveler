@@ -212,16 +212,16 @@ bool VideoEngine::FinalizeInitialization()
                        gl::shader_definitions::getDefaultVertex());
     gl::Shader* solid_color_fragment =
         new gl::Shader(GL_FRAGMENT_SHADER,
-                       gl::shader_definitions::SOLID_FRAGMENT);
+                       gl::shader_definitions::getSolidFragment());
     gl::Shader* solid_color_grayscale_fragment =
         new gl::Shader(GL_FRAGMENT_SHADER,
-                       gl::shader_definitions::SOLID_GRAYSCALE_FRAGMENT);
+                       gl::shader_definitions::getSolidGrayscaleFragment());
     gl::Shader* sprite_fragment =
         new gl::Shader(GL_FRAGMENT_SHADER,
-                       gl::shader_definitions::SPRITE_FRAGMENT);
+                       gl::shader_definitions::getSpriteFragment());
     gl::Shader* sprite_grayscale_fragment =
         new gl::Shader(GL_FRAGMENT_SHADER,
-                       gl::shader_definitions::SPRITE_GRAYSCALE_FRAGMENT);
+                       gl::shader_definitions::getSpriteGrayscaleFragment());
 
     // Store the shaders.
     _shaders[gl::shaders::VertexDefault] = default_vertex;
