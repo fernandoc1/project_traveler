@@ -96,9 +96,12 @@ const std::string getSolidFragment() {
         "}\n";
 
 
-const std::string getSolidGrayscaleFragment() { return std::string(SOLID_GRAYSCALE_FRAGMENT); }
+//const std::string getSolidGrayscaleFragment() { return std::string(SOLID_GRAYSCALE_FRAGMENT); }
+//const std::string getSpriteGrayscaleFragment() { return std::string(SPRITE_GRAYSCALE_FRAGMENT); }
+
 const std::string getSpriteFragment() { return readFullTextFile("data/shaders/sprite_fragment.fs"); }
-const std::string getSpriteGrayscaleFragment() { return std::string(SPRITE_GRAYSCALE_FRAGMENT); }
+const std::string getSolidGrayscaleFragment() { return readFullTextFile("data/shaders/sprite_fragment.fs"); }
+const std::string getSpriteGrayscaleFragment() { return readFullTextFile("data/shaders/sprite_fragment.fs"); }
 
 }
 }
