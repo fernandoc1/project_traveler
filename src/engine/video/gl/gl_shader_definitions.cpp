@@ -26,6 +26,7 @@ const std::string getSolidFragment() {
     return readFullTextFile("data/shaders/solid_fragment.fs");
 }
 
+
     const char SOLID_GRAYSCALE_FRAGMENT[] =
         "#version 110\n"
         "\n"
@@ -58,28 +59,6 @@ const std::string getSolidFragment() {
         "        gl_FragColor.b = sum;\n"
         "}\n";
 
-    const char SPRITE_FRAGMENT[] =
-        "#version 110\n"
-        "\n"
-        "//\n"
-        "// Samples a texture for a fragment's output.\n"
-        "//\n"
-        "\n"
-        "uniform vec4 u_Color;\n"
-        "uniform sampler2D u_Texture;\n"
-        "\n"
-        "void main(void)\n"
-        "{\n"
-        "        gl_FragColor.rgba = vec4(texture2D(u_Texture, gl_TexCoord[0].xy));\n"
-        "        gl_FragColor *= gl_Color;\n"
-        "        gl_FragColor *= u_Color;\n"
-        "\n"
-        "        // Alpha Test\n"
-        "        if (gl_FragColor.a <= 0.0)\n"
-        "        {\n"
-        "            discard;\n"
-        "        }\n"
-        "}\n";
 
     const char SPRITE_GRAYSCALE_FRAGMENT[] =
         "\n"
@@ -118,7 +97,7 @@ const std::string getSolidFragment() {
 
 
 const std::string getSolidGrayscaleFragment() { return std::string(SOLID_GRAYSCALE_FRAGMENT); }
-const std::string getSpriteFragment() { return std::string(SPRITE_FRAGMENT); }
+const std::string getSpriteFragment() { return readFullTextFile("data/shaders/sprite_fragment.fs"); }
 const std::string getSpriteGrayscaleFragment() { return std::string(SPRITE_GRAYSCALE_FRAGMENT); }
 
 }

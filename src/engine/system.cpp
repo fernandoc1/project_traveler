@@ -430,9 +430,9 @@ bool SystemEngine::LoadLanguages()
         // Test the current language availability
         if (!vt_system::SystemManager->IsLanguageLocaleAvailable(locale)) {
             if (warnAboutMissingFiles) {
-                std::string mo_filename = locale + "/LC_MESSAGES/" APPSHORTNAME ".mo";
-                PRINT_WARNING << "Couldn't locate gettext .mo file: '" << mo_filename << "'." << std::endl
-                    << "The '" << locale << "' translation will be disabled." << std::endl;
+                //std::string mo_filename = locale + "/LC_MESSAGES/" APPSHORTNAME ".mo";
+                //PRINT_WARNING << "Couldn't locate gettext .mo file: '" << mo_filename << "'." << std::endl
+                //    << "The '" << locale << "' translation will be disabled." << std::endl;
             }
         }
 
