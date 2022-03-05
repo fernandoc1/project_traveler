@@ -1,4 +1,4 @@
-#version 110
+#version 330
 
 //
 // The default transformation pipeline.
@@ -43,11 +43,13 @@ vec4(0.0,  1.0,  0.0, 0.0),
 vec4(0.0,  0.0,  1.0, 0.0),
 vec4(u_tx, u_ty, 0.0, 1.0));
 
+varying highp vec4 frontColor;
+varying highp vec2 texCoord;
+
 void main()
 {
     mat4 u_Rotation = u_RotationX * u_RotationY * u_RotationZ;
     gl_Position       = u_Projection * (u_View * (u_Model * u_Translation * u_Rotation * vec4(in_Vertex, 1.0)));
-    gl_FrontColor     = in_Color;
-    gl_TexCoord[0].xy = in_TexCoords.xy;
+    frontColor     = in_Color;
+    texCoord.xy = in_TexCoords.xy;
 }
-;
