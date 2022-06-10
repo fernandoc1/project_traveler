@@ -3,6 +3,12 @@
 # http://academic.cleardefinition.com/
 # Iowa State University HCI Graduate Program/VRAC
 
+IF(DEFINED ENV{SANITIZE})
+    MESSAGE(">> Sanitize flag enabled.")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -static-libasan -g")
+    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -static-libasan -g")
+ENDIF()
+
 # ls *.cpp | sort | sed "s/^/    /"
 set(LUABIND_SRCS
     class.cpp

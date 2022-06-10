@@ -2,6 +2,12 @@ IF (DEFINED ENV{EMSDK})
     set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/../../webassembly_cmake_modules/WebassemblyToolchain.cmake")
 endif()
 
+IF(DEFINED ENV{SANITIZE})
+    MESSAGE(">> Sanitize flag enabled.")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -static-libasan -g")
+    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -static-libasan -g")
+ENDIF()
+
 project (lua_emscripten)
 cmake_minimum_required(VERSION 2.8)
 

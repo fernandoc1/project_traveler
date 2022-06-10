@@ -55,6 +55,18 @@ else()
 			/usr/lib
 	)
 
+	find_library(GLX_LIBRARY
+		NAMES GLX
+		PATHS /opt/graphics/OpenGL/lib
+			/usr/openwin/lib
+			/usr/shlib /usr/X11R6/lib
+			/opt/vc/lib
+			/usr/lib/aarch64-linux-gnu
+			/usr/lib/arm-linux-gnueabihf
+			/usr/lib
+			/usr/lib/x86_64-linux-gnu
+	)
+
 	find_library(OPENGLES1_gl_LIBRARY
 		NAMES GLESv1_CM
 		PATHS /opt/graphics/OpenGL/lib
@@ -101,7 +113,7 @@ else()
 	endif()
 endif()
 
-set(OPENGLES2_LIBRARIES ${OPENGLES2_LIBRARIES} ${OPENGLES2_LIBRARY} ${OPENGLES1_gl_LIBRARY})
+set(OPENGLES2_LIBRARIES ${OPENGLES2_LIBRARIES} ${OPENGLES2_LIBRARY} ${OPENGLES1_gl_LIBRARY} ${GLX_LIBRARY})
 
 if(BUILD_ANDROID)
 	if(OPENGLES2_LIBRARY)

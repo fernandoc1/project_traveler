@@ -5,6 +5,13 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/lua)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/lua/)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/nul)
 
+
+IF(DEFINED ENV{SANITIZE})
+    MESSAGE(">> Sanitize flag enabled.")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -static-libasan -g")
+    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -static-libasan -g")
+ENDIF()
+
 IF (DEFINED ENV{EMSDK})
 
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/webassembly_deps/)
