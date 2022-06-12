@@ -110,3 +110,5 @@ ValyriaTear-VS2013-Dependencies
 #src/luabind
 
 build_emcc/*
+
+tmp/*
